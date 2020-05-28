@@ -1,5 +1,3 @@
-console.log('Test Change');
-
 const types = {
   EXTRA_DAMAGE: 'ed',
   D6: 'd6',
