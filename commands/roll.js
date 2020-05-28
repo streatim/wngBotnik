@@ -125,7 +125,6 @@ const utils = {
     }
 
     const output = [
-      '',
       'Roll ['+context+']: You obtain (**' + iconCount + '**) Icons!',
       '[Standard] *' + rollList + '* ',
       '[Wrath] *' + wrathList + '*',
