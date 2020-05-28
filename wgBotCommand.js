@@ -17,8 +17,7 @@ const condition = require('./commands/condition.js');
 
 //Listen to messages for potential commands.
 bot.on('message', msg=> {	
-	if(msg.content.startsWith('!wg')){
-		try {		
+	if(msg.content.startsWith('!wg')){	
 		//Gather everything after the ! but excluding any spaces. All commands can be expected to be !{command} {extra info for command}. Will sanitize the context in each function.
 		var msgCommand = msg.content.substring(3).split(' ')[0].toLowerCase();
 		var msgContext = msg.content.substring(msgCommand.length+4).toLowerCase();
@@ -31,11 +30,11 @@ bot.on('message', msg=> {
 				return msg.channel.send(msg.author+' ('+msg.content+') '+complication(msgContext));
 		 	case 'condition':
 				return msg.channel.send(msg.author+' ('+msg.content+') '+condition(msgContext));
-			/*case 'crit':
+			case 'crit':
 				return msg.channel.send(msg.author+' ('+msg.content+') '+crit());
 			//case 'injury':
 				//return msg.channel.send(msg.author+' ('+msg.content+') '+roll(msgContext));
-			case 'mutation':
+			/*case 'mutation':
 				return msg.channel.send(msg.author+' ('+msg.content+') '+mutation(msgContext));				
 			case 'objective':
 				return msg.channel.send(msg.author+' ('+msg.content+') '+objective(msgContext));
@@ -47,7 +46,6 @@ bot.on('message', msg=> {
 				return msg.channel.send(msg.author+' ('+msg.content+') '+help(msgContext));
 			default:
 				return msg.channel.send(msg.author+' ('+msg.content+') '+help());*/		
-			}
-		} catch (e) {return msg.channel.send(e);}
+		}
 	}	
 });
