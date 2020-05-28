@@ -26,15 +26,11 @@ const roll = function(context) {
     }
   } catch (e) {
     console.log(e)
-    return utils.badCall()
+    return common.badCall('roll')
   }
 }
 
 const utils = {
-  badCall() {
-    return ': Please see !wghelp roll for instructions on how to use the !wgroll command.';
-  },
-
   d3() {
     return ': Roll [d3]`: You rolled a (**' + common.dice(3) + '**)!';  
   },
@@ -91,7 +87,8 @@ const utils = {
   rollWrath(context) {
     const diceString = context.split('w');
     const wrath = isNaN(parseInt(diceString[1])) ? 1 : parseInt(diceString[1]);
-    const regular = parseInt(diceString[0]) - wrath;	
+    const regular = parseInt(diceString[0]) - wrath;
+    if(regular<0){return common.badCall('roll');} //Return a bad call if more wrath die are called for than in the dice pool.
     const pool = utils.getPool();
 
     let iconCount = 0;
@@ -129,7 +126,7 @@ const utils = {
 
     const output = [
       '',
-      ': Roll ['+context+']: You obtain (**' + iconCount + '**) Icons!',
+      'Roll ['+context+']: You obtain (**' + iconCount + '**) Icons!',
       '[Standard] *' + rollList + '* ',
       '[Wrath] *' + wrathList + '*',
       '[Exalted Icons] ' + exaltedIconCount,
