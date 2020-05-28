@@ -1,3 +1,5 @@
+const common = require('./common.js');
+
 const types = {
   EXTRA_DAMAGE: 'ed',
   D6: 'd6',
@@ -34,20 +36,15 @@ const utils = {
   },
 
   d3() {
-    return ': Roll [d3]`: You rolled a (**' + utils.dice(3) + '**)!';  
+    return ': Roll [d3]`: You rolled a (**' + common.dice(3) + '**)!';  
   },
 
   d6() {
-    return ': Roll [d6]`: You rolled a (**' + utils.dice(6) + '**)!';
+    return ': Roll [d6]`: You rolled a (**' + common.dice(6) + '**)!';
   },
 
   d66() {
-    return ': Roll [d66]`: You rolled a (**' + utils.dice(6) + dice(6) + '**)!';    
-  },
-
-  dice(potential) {
-    output = Math.ceil(Math.random() * potential);
-    return output;
+    return ': Roll [d66]`: You rolled a (**' + common.dice(6) + common.dice(6) + '**)!';    
   },
 
   extraDamage(context) {
@@ -61,7 +58,7 @@ const utils = {
     
     const rollList = new Array();
     for (let i = 0; i < rollDice; i++) {
-      const result = utils.dice(6);
+      const result = common.dice(6);
       rollList.push(result);
       damage += pool[result - 1];
     }
@@ -105,10 +102,8 @@ const utils = {
     const rollList = [];
     const wrathList = [];
 
-    const output = [''];  // start with a blank line
-
     for (let i = 0; i < regular; i++) {
-      let result = utils.dice(6);
+      let result = common.dice(6);
       rollList.push(result);
       iconCount += pool[result - 1];
       
@@ -118,7 +113,7 @@ const utils = {
     }
 
     for (let i = 0; i < wrath; i++) {
-      result = utils.dice(6);
+      result = common.dice(6);
       wrathList.push(result);
       iconCount += pool[result - 1];
 
@@ -132,11 +127,14 @@ const utils = {
       }
     }
 
-    output.push(': Roll ['+context+']: You obtain (**' + iconCount + '**) Icons!');
-    output.push('[Standard] *' + rollList + '* ');
-    output.push('[Wrath] *' + wrathList + '*');
-    output.push('[Exalted Icons] ' + exaltedIconCount);
-    output.push('[Perils] ' + perilsCount);
+    const output = [
+      '',
+      ': Roll ['+context+']: You obtain (**' + iconCount + '**) Icons!',
+      '[Standard] *' + rollList + '* ',
+      '[Wrath] *' + wrathList + '*',
+      '[Exalted Icons] ' + exaltedIconCount,
+      '[Perils] ' + perilsCount,
+    ]
 
     if (glory == true) {
       output.push('*You bring* __**Glory**__ *to your team!!*');
@@ -146,12 +144,8 @@ const utils = {
     }
 
     // Join output with line breaks
-    console.log(output)
     return output.join('\r');
   }
 }
-
-console.log(roll('d6'));
-console.log(roll('2w2'));
 
 module.exports = roll;
