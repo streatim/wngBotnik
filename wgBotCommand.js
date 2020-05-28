@@ -4,16 +4,16 @@ const bot = new Discord.Client();
 bot.login(config.token);
 
 //Require all command files.
-const roll = require('./roll.js');
-const complication = require('./complication.js');
-const condition = require('./condition.js');
-const crit = require('./crit.js');
-//const injury = require('./injury.js');
-const mutation = require('./mutation.js');
-const objective = require('./objective.js');
-const perils = require('./perils.js');
-const trinket = require('./trinket.js');
-const help = require('./help.js');
+const roll = require('./commands/roll.js');
+const complication = require('./commands/complication.js');
+const condition = require('./commands/condition.js');
+const crit = require('./commands/crit.js');
+//const injury = require('./commands/injury.js');
+const mutation = require('./commands/mutation.js');
+const objective = require('./commands/objective.js');
+const perils = require('./commands/perils.js');
+const trinket = require('./commands/trinket.js');
+const help = require('./commands/help.js');
 
 //Listen to messages for potential commands.
 bot.on('message', msg=> {	
