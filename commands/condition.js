@@ -27,7 +27,7 @@ const condition = function condition(context){
             '[**'+conditionType.toUpperCase()+'**]',
             conditionArray[conditionType]
         ];
-        return condOutput.join('/r');
+        return condOutput.join('\r');
     } else {return common.badCall('condition');}
 }
 
