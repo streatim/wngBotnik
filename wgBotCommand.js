@@ -7,7 +7,7 @@ bot.login(config.token);
 const roll = require('./commands/roll.js');
 const complication = require('./commands/complication.js');
 const condition = require('./commands/condition.js');
-//const crit = require('./commands/crit.js');
+const crit = require('./commands/crit.js');
 //const injury = require('./commands/injury.js');
 //const mutation = require('./commands/mutation.js');
 //const objective = require('./commands/objective.js');

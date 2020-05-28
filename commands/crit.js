@@ -85,17 +85,17 @@ const critArray = {
 };    
 
 const crit = function crit(){  
-    critRollOne = common.dice(6);
-    critRollTwo = common.dice(6);
-    critRollString = dice(6).toString()+dice(6).toString();
-    index = critArray['matrix'][rollOne][rollTwo-1];
+    const critRollOne = common.dice(6);
+    const critRollTwo = common.dice(6);
+    const critRollString = critRollOne.toString()+critRollTwo.toString();
+    const critIndex = critArray['matrix'][rollOne][rollTwo-1];
 
     critOutput = [
         'Critical Hit ('+critRollString+'): ',
-        '[**'+critArray['values'][index]['name']+'**]',
-        '*'+  critArray['values'][index]['description']+'*',
-        '[**Effect**]: '+critArray['values'][index]['effect'],
-        '[**Glory**]: '+critArray['values'][index]['glory']
+        '[**'+critArray['values'][critIndex]['name']+'**]',
+        '*'+  critArray['values'][critIndex]['description']+'*',
+        '[**Effect**]: '+critArray['values'][critIndex]['effect'],
+        '[**Glory**]: '+critArray['values'][critIndex]['glory']
     ];
     return critOutput.join('\r');
 }
