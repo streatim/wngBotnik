@@ -1,3 +1,5 @@
+console.log('Test Change');
+
 const types = {
   EXTRA_DAMAGE: 'ed',
   D6: 'd6',
@@ -150,5 +152,8 @@ const utils = {
     return output.join('\r');
   }
 }
+
+console.log(roll('d6'));
+console.log(roll('2w2'));
 
 module.exports = roll;
