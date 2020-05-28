@@ -151,7 +151,4 @@ const utils = {
   }
 }
 
-console.log(roll('d6'));
-console.log(roll('2w2'));
-
 module.exports = roll;
