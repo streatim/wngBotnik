@@ -88,7 +88,7 @@ const crit = function crit(){
     const critRollOne = common.dice(6);
     const critRollTwo = common.dice(6);
     const critRollString = critRollOne.toString()+critRollTwo.toString();
-    const critIndex = critArray['matrix'][rollOne][rollTwo-1];
+    const critIndex = critArray['matrix'][critRollOne][critRollTwo-1];
 
     critOutput = [
         'Critical Hit ('+critRollString+'): ',
