@@ -1,4 +1,4 @@
-const common = require('./common.js');
+const common = require('./../common.js');
 
 //Build an array of conditions.
 const conditionArray = {
@@ -24,11 +24,10 @@ const condition = function condition(context){
     //This function provides information about the conditions listed.
     if(conditionType in conditionArray){
         const condOutput = [
-            '[**'+coditionType.toUpperCase()+'**]',
+            '[**'+conditionType.toUpperCase()+'**]',
             conditionArray[conditionType]
         ];
-        condOutput.join('/r');
-        return condOutput;
+        return condOutput.join('/r');
     } else {return common.badCall('condition');}
 }
 

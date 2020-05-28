@@ -7,17 +7,18 @@ bot.login(config.token);
 const roll = require('./commands/roll.js');
 const complication = require('./commands/complication.js');
 const condition = require('./commands/condition.js');
-const crit = require('./commands/crit.js');
+//const crit = require('./commands/crit.js');
 //const injury = require('./commands/injury.js');
-const mutation = require('./commands/mutation.js');
-const objective = require('./commands/objective.js');
-const perils = require('./commands/perils.js');
-const trinket = require('./commands/trinket.js');
-const help = require('./commands/help.js');
+//const mutation = require('./commands/mutation.js');
+//const objective = require('./commands/objective.js');
+//const perils = require('./commands/perils.js');
+//const trinket = require('./commands/trinket.js');
+//const help = require('./commands/help.js');
 
 //Listen to messages for potential commands.
 bot.on('message', msg=> {	
 	if(msg.content.startsWith('!wg')){
+		try {		
 		//Gather everything after the ! but excluding any spaces. All commands can be expected to be !{command} {extra info for command}. Will sanitize the context in each function.
 		var msgCommand = msg.content.substring(3).split(' ')[0].toLowerCase();
 		var msgContext = msg.content.substring(msgCommand.length+4).toLowerCase();
@@ -25,12 +26,12 @@ bot.on('message', msg=> {
 		//Check to see what the command was. If it's an existing command, run that command and report back the result. Otherwise, run a basic help command with no context.
 		switch (msgCommand){
 			case 'roll':
-				return msg.channel.send(msg.author+' ('+msg.content+') '+roll(msgContext));
+				return msg.channel.send(msg.author+' ('+msg.content+') '+roll(msgContext));		
 			case 'complication':
 				return msg.channel.send(msg.author+' ('+msg.content+') '+complication(msgContext));
-			case 'condition':
+		 	case 'condition':
 				return msg.channel.send(msg.author+' ('+msg.content+') '+condition(msgContext));
-			case 'crit':
+			/*case 'crit':
 				return msg.channel.send(msg.author+' ('+msg.content+') '+crit());
 			//case 'injury':
 				//return msg.channel.send(msg.author+' ('+msg.content+') '+roll(msgContext));
@@ -45,7 +46,8 @@ bot.on('message', msg=> {
 			case 'help':
 				return msg.channel.send(msg.author+' ('+msg.content+') '+help(msgContext));
 			default:
-				return msg.channel.send(msg.author+' ('+msg.content+') '+help());
-		}
+				return msg.channel.send(msg.author+' ('+msg.content+') '+help());*/		
+			}
+		} catch (e) {return msg.channel.send(e);}
 	}	
 });

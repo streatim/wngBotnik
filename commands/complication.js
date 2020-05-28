@@ -1,3 +1,5 @@
+const common = require('./../common.js');
+
 //Array of Complications, split between "Combat" and "Other" (which were listed on two separate pages).
 //Each complication has a name and description (name/desc). There is also a matrix that provides the index
 //based off a d66 roll.
