@@ -1,0 +1,14 @@
+{
+  "name": "wngbotnik",
+  "version": "1.0.0",
+  "description": "Customized version of a WnG Bot for Dicerolling and such. Originally written by GeekzAnonymous as WnGDR.",
+  "main": "wgBotCommand.js",
+  "author": "Tim het Maus",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.6.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
