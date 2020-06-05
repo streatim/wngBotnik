@@ -13,6 +13,7 @@ const mutation = require('./commands/mutation.js');
 const objective = require('./commands/objective.js');
 const perils = require('./commands/perils.js');
 const trinket = require('./commands/trinket.js');
+const weapons = require('./commands/weapons.js').weapons;
 const help = require('./commands/help.js');
 
 //Listen to messages for potential commands.
@@ -42,6 +43,8 @@ bot.on('message', msg=> {
 				return msg.channel.send(msg.author+' ('+msg.content+') \r'+perils(msgContext));
 			case 'trinket':
 				return msg.channel.send(msg.author+' ('+msg.content+') \r'+trinket());
+			case 'weapon':
+				return msg.channel.send(msg.author+' ('+msg.content+') \r'+weapon(msgContext));
 			case 'help':
 				return msg.channel.send(msg.author+' ('+msg.content+') \r'+help(msgContext));
 			default:
