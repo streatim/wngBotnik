@@ -44,7 +44,7 @@ bot.on('message', msg=> {
 			case 'trinket':
 				return msg.channel.send(msg.author+' ('+msg.content+') \r'+trinket());
 			case 'weapon':
-				return msg.channel.send(msg.author+' ('+msg.content+') \r'+weapon(msgContext));
+				return msg.channel.send(msg.author+' ('+msg.content+') \r'+weapons(msgContext));
 			case 'help':
 				return msg.channel.send(msg.author+' ('+msg.content+') \r'+help(msgContext));
 			default:
