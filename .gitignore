@@ -1,3 +1,6 @@
 #Ignore auth.json and node_modules/
 auth.json
 node_modules/
+
+# Mac specific
+.DS_Store
