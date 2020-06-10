@@ -12,19 +12,17 @@ it('getSearchTerm correct replaces alternate searches with the correct keyword',
 
 it('searchByKeyword correctly returns keyword matches', () => {
   const results = utils.searchByKeyword('primaris');
-  expect(results.length).toEqual(3);
+  expect(results[1].split(',').length).toEqual(3);
 });
 
 it('correctly outputs a weapon', () => {
   const result = weapons('bolt rifle');
   expect(result.split('\r')).toEqual(
     expect.arrayContaining([
-      'Name: Bolt Rifle',
+      '**Bolt Rifle**',
       '[Damage]: 10 [ED]: 1 [AP]: -1',
-      '[Short]: 15 [Medium]: 30 [Long]: 45',
-      '[Salvo]: 2',
-      '[Traits]: Brutal, Rapid Fire [2]',
-      '[Keywords]: BOLT, IMPERIUM, ADEPTUS ASTARTES, PRIMARIS'
+      '[Short]: 15 [Medium]: 30 [Long]: 45 [Salvo]: 2',
+      '[Traits]: Brutal, Rapid Fire [2] [Keywords]: BOLT, IMPERIUM, ADEPTUS ASTARTES, PRIMARIS'
     ])
   );
 });

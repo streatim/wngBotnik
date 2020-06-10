@@ -19,15 +19,13 @@ const utils = {
     let output = []
     arr.forEach(weapon => {
       output = output.concat([
-        'Name: ' + weapon.name,
+        '**' + weapon.name + '**',
         '[Damage]: ' + weapon.damage + ' [ED]: ' + weapon.ed + ' [AP]: ' + weapon.ap,
-        '[Short]: ' + weapon.rangeShort + ' [Medium]: ' + weapon.rangeMedium + ' [Long]: ' + weapon.rangeLong,
-        '[Salvo]: ' + weapon.salvo,
-        '[Traits]: ' + weapon.traits.join(', '),
+        '[Short]: ' + weapon.rangeShort + ' [Medium]: ' + weapon.rangeMedium + ' [Long]: ' + weapon.rangeLong + ' [Salvo]: ' + weapon.salvo,
         // Let's ignore value and rarity for now
         // value: 4,
         // rarity: 'Uncommon',
-        '[Keywords]: ' + weapon.keywords.join(', ')
+        '[Traits]: ' + weapon.traits.join(', ') + ' [Keywords]: ' + weapon.keywords.join(', ')
       ]);
     });
 
@@ -41,11 +39,16 @@ const utils = {
       const entry = dict[name];
       const keywords = entry.keywords || [];
       if (keywords.indexOf(searchTerm) > -1) {
-        results.push(entry);
+        results.push(entry.name);
       }
     })
 
-    return results;
+    const output = [
+      `You searched [**${keyword}**] (${results.length})`,
+      `*${results.join(', ')}*`
+    ]
+
+    return output;
   }
 }
 
@@ -56,8 +59,7 @@ const weapons = function(context) {
       return utils.print([dict[context]]);
     }
     // By keyword
-    const results = utils.searchByKeyword(context);
-    return utils.print(results);
+    return utils.searchByKeyword(context);
   } catch (e) {
     console.log(e)
     return common.badCall('weapons')
