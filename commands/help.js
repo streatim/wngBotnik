@@ -96,7 +96,7 @@ const help = function help(context){
                     'Use !wghelp {command} to get more information about the command. Please note that commands must be prefixed by "!wg" to work.',
                     'The list of possible commands are: ',
                     'complication     condition',
-                    'crit             injury',
+                    'crit',
                     'mutation         objective',
                     'perils           roll',
                     'trinket'

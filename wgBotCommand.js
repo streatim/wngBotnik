@@ -33,8 +33,8 @@ bot.on('message', msg=> {
 				return msg.channel.send(msg.author+' ('+msg.content+') \r'+condition(msgContext));
 			case 'crit':
 				return msg.channel.send(msg.author+' ('+msg.content+') \r'+crit());
-			case 'injury':
-				return msg.channel.send(msg.author+' ('+msg.content+') \r'+injury(msgContext));
+//			case 'injury':
+//				return msg.channel.send(msg.author+' ('+msg.content+') \r'+injury(msgContext));
 			case 'mutation':
 				return msg.channel.send(msg.author+' ('+msg.content+') \r'+mutation(msgContext));				
 			case 'objective':
