@@ -5,7 +5,7 @@ const operators = {
     '*': function(a, b) {return a * b },
     '/': function(a, b) {return Math.floor(a/b)}
 };
-const operatorOptions = ['+', '-'];
+const operatorOptions = ['+', '-', '*', '/'];
 
 const indRoll = function indRoll(context){
     //Set default values for rolls. We can expect that this follows one of two formats: dY or XdY
