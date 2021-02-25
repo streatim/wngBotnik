@@ -2,6 +2,8 @@ const common = require('../../common.js');
 const operators = {
     '+': function(a, b) {return a + b },
     '-': function(a, b) {return a - b },
+    '*': function(a, b) {return a * b },
+    '/': function(a, b) {return Math.floor(a/b)}
 };
 const operatorOptions = ['+', '-'];
 
