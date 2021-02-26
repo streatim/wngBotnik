@@ -80,7 +80,7 @@ const pfroll = function pfroll(context){
                 //Add the rolls to the diceStrings, rollResultsStrings, and totalAlter.
                 totalAlter = result.indRollTotal;
                 diceStrings.push(result.roll + result.plural);
-                rollResultStrings.push(op+' '+result.indRollTotal+' - '+result.roll+result.plural+': *('+result.rollList+')*');
+                rollResultStrings.push(op+result.indRollTotal+' ('+result.roll+result.plural+': *'+result.rollList+'*)');
             } else if(operatorOptions.includes(rollCombos[j])) {
                 //It's an operator.
                 op = rollCombos[j];
