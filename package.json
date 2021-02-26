@@ -6,7 +6,9 @@
   "author": "Tim het Maus",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.5.1"
+    "discord.js": "^12.5.1",
+    "sequelize": "^6.5.0",
+    "sqlite3": "^5.0.2"
   },
   "scripts": {
     "test": "jest"
