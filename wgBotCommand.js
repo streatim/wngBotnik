@@ -31,29 +31,29 @@ bot.on('message', msg=> {
 		//Check to see what the command was. If it's an existing command, run that command and report back the result. Otherwise, run a basic help command with no context.
 		switch (msgCommand){
 			case 'roll':
-				return msg.channel.send('@'+msg.author.username+' ('+msg.content+') \r'+roll(msgContext));		
+				return msg.channel.send('@'+msg.author.toString()+' ('+msg.content+') \r'+roll(msgContext));		
 			case 'complication':
-				return msg.channel.send('@'+msg.author.username+' ('+msg.content+') \r'+complication(msgContext));
+				return msg.channel.send('@'+msg.author.toString()+' ('+msg.content+') \r'+complication(msgContext));
 		 	case 'condition':
-				return msg.channel.send('@'+msg.author.username+' ('+msg.content+') \r'+condition(msgContext));
+				return msg.channel.send('@'+msg.author.toString()+' ('+msg.content+') \r'+condition(msgContext));
 			case 'crit':
-				return msg.channel.send('@'+msg.author.username+' ('+msg.content+') \r'+crit());
+				return msg.channel.send('@'+msg.author.toString()+' ('+msg.content+') \r'+crit());
 //			case 'injury':
-//				return msg.channel.send('@'+msg.author.username+' ('+msg.content+') \r'+injury(msgContext));
+//				return msg.channel.send('@'+msg.author.toString()+' ('+msg.content+') \r'+injury(msgContext));
 			case 'mutation':
-				return msg.channel.send('@'+msg.author.username+' ('+msg.content+') \r'+mutation(msgContext));				
+				return msg.channel.send('@'+msg.author.toString()+' ('+msg.content+') \r'+mutation(msgContext));				
 			case 'objective':
-				return msg.channel.send('@'+msg.author.username+' ('+msg.content+') \r'+objective(msgContext));
+				return msg.channel.send('@'+msg.author.toString()+' ('+msg.content+') \r'+objective(msgContext));
 			case 'perils':
-				return msg.channel.send('@'+msg.author.username+' ('+msg.content+') \r'+perils(msgContext));
+				return msg.channel.send('@'+msg.author.toString()+' ('+msg.content+') \r'+perils(msgContext));
 			case 'trinket':
-				return msg.channel.send('@'+msg.author.username+' ('+msg.content+') \r'+trinket());
+				return msg.channel.send('@'+msg.author.toString()+' ('+msg.content+') \r'+trinket());
 			case 'weapon':
-				return msg.channel.send('@'+msg.author.username+' ('+msg.content+') \r'+weapons(msgContext));
+				return msg.channel.send('@'+msg.author.toString()+' ('+msg.content+') \r'+weapons(msgContext));
 			case 'help':
-				return msg.channel.send('@'+msg.author.username+' ('+msg.content+') \r'+help(msgContext));
+				return msg.channel.send('@'+msg.author.toString()+' ('+msg.content+') \r'+help(msgContext));
 			default:
-				return msg.channel.send('@'+msg.author.username+' ('+msg.content+') \r'+help());	
+				return msg.channel.send('@'+msg.author.toString()+' ('+msg.content+') \r'+help());	
 		}
 	}else{
 		if(msg.content.startsWith('!pf')){
@@ -74,11 +74,11 @@ bot.on('message', msg=> {
 		
 			switch (msgCommand){
 				case 'roll':
-					return msg.channel.send('@'+msg.author.username+' ('+msg.content+') \r'+pfroll(msgContext)+ericAdd);
+					return msg.channel.send('@'+msg.author.toString()+' ('+msg.content+') \r'+pfroll(msgContext)+ericAdd);
 				case 'help':
-					return msg.channel.send('@'+msg.author.username+' ('+msg.content+') \r'+pfhelp(msgContext)+ericAdd);					
+					return msg.channel.send('@'+msg.author.toString()+' ('+msg.content+') \r'+pfhelp(msgContext)+ericAdd);					
 				default:
-					return msg.channel.send(pfff('@'+msg.author.username));
+					return msg.channel.send(pfff('@'+msg.author.toString()));
 			}
 		}
 	}	
