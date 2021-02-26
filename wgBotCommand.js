@@ -58,7 +58,7 @@ bot.on('message', msg=> {
 	}else{
 		if(msg.content.startsWith('!pf')){
 			//Deal with Eric's comment. :D
-			const pfCommands = ['roll', 'help'];
+			const pfCommands = ['roll', 'help', 'test'];
 			let msgCommand = '';
 			let msgContext = '';
 			let ericAdd = '';
@@ -77,6 +77,8 @@ bot.on('message', msg=> {
 					return msg.channel.send(msg.author+' ('+msg.content+') \r'+pfroll(msgContext)+ericAdd);
 				case 'help':
 					return msg.channel.send(msg.author+' ('+msg.content+') \r'+pfhelp(msgContext)+ericAdd);					
+				case 'test':
+					return msg.channel.send(msg);
 				default:
 					return msg.channel.send(pfff(msg.author));
 			}
