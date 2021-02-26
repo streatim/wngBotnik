@@ -28,7 +28,7 @@ const indRoll = function indRoll(context){
     return {
         roll: x+'d'+y,
         plural: plural,
-        rollList: rollList.join(', '),
+        rollList: '('+rollList.join(' + ')+' = '+indRollTotal+')',
         indRollTotal: indRollTotal
     };
 }
@@ -58,7 +58,7 @@ const pfroll = function pfroll(context){
     for(i=0;i<rollCommands.length;i++){
         if(rollCommands[i] === ''){continue;}  
         //Split the roll by additions and subtractions. We need to keep them in the output because we need to know if we're adding or subtracting things.
-        let rollCombos = rollCommands[i].split(/\s*(\+|\-)\s*/).map(userInput => userInput.trim());
+        let rollCombos = rollCommands[i].split(/\s*(\+|\-|\\|\*)\s*/).map(userInput => userInput.trim());
         
         //Set the default values for all of the commands.
         let op = '+'; //Default operator - addition.
@@ -80,7 +80,7 @@ const pfroll = function pfroll(context){
                 //Add the rolls to the diceStrings, rollResultsStrings, and totalAlter.
                 totalAlter = result.indRollTotal;
                 diceStrings.push(result.roll + result.plural);
-                rollResultStrings.push(op+result.roll+result.plural+': *'+result.rollList+'*');
+                rollResultStrings.push(op+' '+result.indRollTotal+' - '+result.roll+result.plural+': *('+result.rollList+')*');
             } else if(operatorOptions.includes(rollCombos[j])) {
                 //It's an operator.
                 op = rollCombos[j];
@@ -88,7 +88,8 @@ const pfroll = function pfroll(context){
             } else {
                 //At this point, this *should* be just a number to be added or subtracted from the values. If it isn't an integer, make it 0.
                 totalAlter = common.intValCheck(rollCombos[j], 0);
-                modifyString += op+totalAlter;
+                rollResultStrings.push(op+' '+totalAlter)
+                //modifyString += op+totalAlter;
             }      
             totalRoll = operators[op](totalRoll, totalAlter);
         }
@@ -97,7 +98,6 @@ const pfroll = function pfroll(context){
 
         rollStrings.push(diceString);
         if(rollResultString !== ''){
-            rollStrings.push('You rolled:');
             rollStrings.push(rollResultString);
         }
         if(modifyString !== ''){rollStrings.push(modifyString);}
