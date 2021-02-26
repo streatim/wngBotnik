@@ -5,7 +5,7 @@ const operators = {
     '*': function(a, b) {return a * b },
     '/': function(a, b) {return Math.floor(a/b)}
 };
-const operatorOptions = ['+', '-', '*', '/'];
+const operatorOptions = ['+', '-'];
 
 const indRoll = function indRoll(context){
     //Set default values for rolls. We can expect that this follows one of two formats: dY or XdY
@@ -28,7 +28,7 @@ const indRoll = function indRoll(context){
     return {
         roll: x+'d'+y,
         plural: plural,
-        rollList: '('+rollList.join(' + ')+' = '+indRollTotal+')',
+        rollList: '('+rollList.join(' + ')+')',
         indRollTotal: indRollTotal
     };
 }
@@ -58,7 +58,7 @@ const pfroll = function pfroll(context){
     for(i=0;i<rollCommands.length;i++){
         if(rollCommands[i] === ''){continue;}  
         //Split the roll by additions and subtractions. We need to keep them in the output because we need to know if we're adding or subtracting things.
-        let rollCombos = rollCommands[i].split(/\s*(\+|\-|\\|\*)\s*/).map(userInput => userInput.trim());
+        let rollCombos = rollCommands[i].split(/\s*(\+|\-)\s*/).map(userInput => userInput.trim());
         
         //Set the default values for all of the commands.
         let op = '+'; //Default operator - addition.
@@ -88,7 +88,7 @@ const pfroll = function pfroll(context){
             } else {
                 //At this point, this *should* be just a number to be added or subtracted from the values. If it isn't an integer, make it 0.
                 totalAlter = common.intValCheck(rollCombos[j], 0);
-                rollResultStrings.push(op+' '+totalAlter)
+                rollResultStrings.push(op+totalAlter)
                 //modifyString += op+totalAlter;
             }      
             totalRoll = operators[op](totalRoll, totalAlter);
