@@ -1,6 +1,7 @@
 const pff = function pff(author){
     const insult = {
         adj1: [
+            'saucy',
             'artless',
             'bawdy',
             'beslubbering',
