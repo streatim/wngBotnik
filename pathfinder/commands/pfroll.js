@@ -63,7 +63,7 @@ const pfroll = function pfroll(context){
         if(rollCommands[i].match(/^[\+|-]\s*\d+$/)){
             //This command is just +5 or +2 or something. In the old program this defaulted to 1d20+/-Y, and Joe really liked it. So we're putting it back in.
             joeCallout = '/rThis only works because Joe made Tim sad.';
-            rollCommands[i] = '1d20'+rollComands[i];
+            rollCommands[i] = '1d20'+rollCommands[i];
         }
 
         //Split the roll by additions and subtractions. We need to keep them in the output because we need to know if we're adding or subtracting things.
