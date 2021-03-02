@@ -47,6 +47,7 @@ const pfroll = function pfroll(context){
     */
     //Set array variables that will be used later in the function.
     const output = [];
+    let joeCallout = '';
 
     //Set everything to lowercase.
     let normalizedContext = context.toLowerCase();
@@ -56,7 +57,15 @@ const pfroll = function pfroll(context){
 
     //rollCommands is now an array of different roll commands. Loop through them and start to put together the output strings.
     for(i=0;i<rollCommands.length;i++){
-        if(rollCommands[i] === ''){continue;}  
+        if(rollCommands[i] === ''){continue;}
+        
+        //Check to see if the rollcommand is just +NUM or -NUM. This is because Joe was sad.
+        if(rollCommands[i].match(/[\+|-]\s*\d+/)){
+            //This command is just +5 or +2 or something. In the old program this defaulted to 1d20+/-Y, and Joe really liked it. So we're putting it back in.
+            joeCallout = '/rThis only works because Joe made Tim sad.';
+            rollCommands[i] = '1d20'+rollComands[i];
+        }
+
         //Split the roll by additions and subtractions. We need to keep them in the output because we need to know if we're adding or subtracting things.
         let rollCombos = rollCommands[i].split(/\s*(\+|\-)\s*/).map(userInput => userInput.trim());
         
@@ -109,7 +118,7 @@ const pfroll = function pfroll(context){
     output[0] = 'Rolling '+output[0];
 
     //If there are more than one result in output, then add two line breaks and "Then you rolled "
-    return output.join('\r\rThen you rolled ');
+    return output.join('\r\rThen you rolled ')+joeCallout;
 }
 
 module.exports = pfroll;
