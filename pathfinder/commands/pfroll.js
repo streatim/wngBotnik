@@ -62,7 +62,7 @@ const pfroll = function pfroll(context){
         //Check to see if the rollcommand is just +NUM or -NUM. This is because Joe was sad.
         if(rollCommands[i].match(/^[\+|-]\s*\d+$/)){
             //This command is just +5 or +2 or something. In the old program this defaulted to 1d20+/-Y, and Joe really liked it. So we're putting it back in.
-            joeCallout = '/rThis only works because Joe made Tim sad.';
+            joeCallout = '\rThis only works because Joe made Tim sad.';
             rollCommands[i] = '1d20'+rollCommands[i];
         }
 
