@@ -1,4 +1,4 @@
-const common = require('./../common.js');
+const {badCall} = require('./../../common.js');
 
 //Build an array of conditions.
 const conditionArray = {
@@ -18,17 +18,36 @@ const conditionArray = {
     'vulnerable': 'Your defences are open! While Vulnerable, you suffer −1 to your Defence. Certain abilities and effects increase this penalty. Being Vulnerable lasts until the end of your next Turn.'
 };
 
-const condition = function condition(context){
-    const conditionType = context.trim();
-
-    //This function provides information about the conditions listed.
-    if(conditionType in conditionArray){
-        const condOutput = [
-            '[**'+conditionType.toUpperCase()+'**]',
-            conditionArray[conditionType]
-        ];
-        return condOutput.join('\r');
-    } else {return common.badCall('condition');}
-}
-
-module.exports = condition;
+module.exports = {
+    name: 'condition',
+    description: [
+        'Provides more information about the condition called on by the syntax.',
+        'List of conditions:',
+        '```',
+        'bleeding      blinded',
+        'exhausted     fear',
+        'frenzied      hindered',
+        'on fire       pinned',
+        'poisoned      prone',
+        'restrained    staggered', 
+        'terror        vulnerable',
+        '```'
+    ],
+    usage: [
+        'condition {condition}'
+    ],
+    execute(context, prefix){
+        const conditionType = context.trim();
+        
+        //This function provides information about the conditions listed.
+        if(conditionType in conditionArray){
+            const condOutput = [
+                '[**'+conditionType.toUpperCase()+'**]',
+                '```'+conditionArray[conditionType]+'```'
+            ];
+            return condOutput.join('\r');
+        } else {
+            return badCall(prefix);
+        }
+    }, 
+};

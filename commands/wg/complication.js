@@ -1,5 +1,4 @@
-const common = require('./../common.js');
-
+const {dice} = require('./../../common.js');
 //Array of Complications, split between "Combat" and "Other" (which were listed on two separate pages).
 //Each complication has a name and description (name/desc). There is also a matrix that provides the index
 //based off a d66 roll.
@@ -62,21 +61,29 @@ const complicationArray = {
     }
 };
 
-//Function that offers a random complication (potentially with combat modifier)
-const complication = function complication(context) {
-	const complicationType = context.trim();		
-	const compTable = (complicationType === 'combat') ? 'combat' : 'other';
-	const compRollOne = common.dice(6);
-	const compRollTwo = common.dice(6);
-	const compIndex = complicationArray[compTable]['matrix'][compRollOne][compRollTwo-1];
-    const compOutput = [
-        'Complication ('+compRollOne.toString()+compRollTwo.toString()+') : ',
-        '[**'+complicationArray[compTable]['values'][compIndex]['name']+'**]',
-        '*'+complicationArray[compTable]['values'][compIndex]['desc']+'*'
-    ]; 
-    
-    //Join the output with line breaks.
-    return compOutput.join('\r');
-}
-
-module.exports = complication;
+module.exports = {
+	name: 'complication',
+	description: [
+		'Random Complication Generator. Gives the description of a complication from the rulebook.',
+		'If you would like to generate a combat complication (from page 191), add "combat" to the end of the command.',
+	],
+	usage: [
+		'complication (Rolls off the general complication table)',
+		'complication combat (Rolls off the combat complication table)',
+	],
+	execute(context){
+		const complicationType = context.trim();		
+		const compTable = (complicationType === 'combat') ? 'combat' : 'other';
+		const compRollOne = dice(6);
+		const compRollTwo = dice(6);
+		const compIndex = complicationArray[compTable]['matrix'][compRollOne][compRollTwo-1];
+		const compOutput = [
+			'Complication ('+compRollOne.toString()+compRollTwo.toString()+') : ',
+			'[**'+complicationArray[compTable]['values'][compIndex]['name']+'**]',
+			'*'+complicationArray[compTable]['values'][compIndex]['desc']+'*'
+		]; 
+		
+		//Join the output with line breaks.
+		return compOutput.join('\r');
+	},
+};

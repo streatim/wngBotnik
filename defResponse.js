@@ -1,4 +1,4 @@
-const pff = function pff(author){
+const defResponse = function defResponse(prefix){
     const insult = {
         adj1: [
             'saucy',
@@ -253,10 +253,11 @@ const pff = function pff(author){
     const noun = insult.noun[Math.floor(Math.random() * insult.noun.length)];
 
     output = [
-        'Sassy Ryan-Bot says "Hey '+author+', did you screw up a command, you',
-        adjective1, adjective2, noun+'?!"'
+        `Sassy Ryan-Response says "Did you screw up a **${prefix}** command, you`,
+        adjective1, adjective2, noun+'?!"',
+        `\rWinners use **${prefix}help**`,
     ]
     return output.join(' ');
 }
 
-module.exports = pff;
+module.exports = defResponse;

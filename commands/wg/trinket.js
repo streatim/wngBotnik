@@ -1,4 +1,4 @@
-const common = require('./../common.js');
+const {dice} = require('./../../common.js');
 
 const trinketArray = [
     [
@@ -16,9 +16,9 @@ const trinketArray = [
          'A power cell incompatible with all known Imperium technology.'],
         ['A pack of thick Astra Militarum issue socks, never opened.',
          'A bottle of finest amasec brewed in Imperium Sanctus.',
-         'A leather pouch containing '+common.dice(6)+' seeds.',
+         'A leather pouch containing '+dice(6)+' seeds.',
          'A book of confounding riddles with a blue and yellow cover and 81 pages.',
-         'A boot polish tin containing '+common.dice(6)+' lho sticks.',
+         'A boot polish tin containing '+dice(6)+' lho sticks.',
          'A necklace made of five regicide playing pieces on a silver chain.'],
         ['A doll in the form of a Space Marine made from an old shirt.',
          'A decagon carved roughly from bone with strange symbols on each face.',
@@ -117,16 +117,22 @@ const trinketArray = [
     ]	
 ]; 
 
-
-const trinket = function trinket() { 
-    const chart = common.dice(3);
-    const trinketRollOne = common.dice(6);
-    const trinketRollTwo = common.dice(6);
-    output = [
-        'Trinket (Chart '+chart+': Roll'+trinketRollOne.toString()+trinketRollTwo.toString()+')',
-        '*'+trinketArray[chart-1][trinketRollOne-1][trinketRollTwo-1]+'*'
-    ]
-    return output.join('\r');
-}
-
-module.exports = trinket;
+module.exports = {
+    name: 'trinket',
+    description: [
+        'Random Trinket Generator. Gives the description of a trinket from one of three trinket tables.',
+    ],    
+    usage: [
+        'trinket',
+    ],
+    execute(){
+        const chart = dice(3);
+        const trinketRollOne = dice(6);
+        const trinketRollTwo = dice(6);
+        output = [
+            'Trinket (Chart '+chart+': Roll'+trinketRollOne.toString()+trinketRollTwo.toString()+')',
+            '*'+trinketArray[chart-1][trinketRollOne-1][trinketRollTwo-1]+'*'
+        ]
+        return output.join('\r');
+    }
+};

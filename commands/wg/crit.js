@@ -1,4 +1,4 @@
-const common = require('./../common.js');
+const {dice} = require('./../../common.js');
 
 //Build an array of critical hit results. Also include a matrix to identify the crit index with a d66 roll.
 const critArray = {
@@ -84,20 +84,27 @@ const critArray = {
     }
 };    
 
-const crit = function crit(){  
-    const critRollOne = common.dice(6);
-    const critRollTwo = common.dice(6);
-    const critRollString = critRollOne.toString()+critRollTwo.toString();
-    const critIndex = critArray['matrix'][critRollOne][critRollTwo-1];
-
-    critOutput = [
-        'Critical Hit ('+critRollString+'): ',
-        '[**'+critArray['values'][critIndex]['name']+'**]',
-        '*'+  critArray['values'][critIndex]['description']+'*',
-        '[**Effect**]: '+critArray['values'][critIndex]['effect'],
-        '[**Glory**]: '+critArray['values'][critIndex]['glory']
-    ];
-    return critOutput.join('\r');
-}
-
-module.exports = crit;
+module.exports = {
+    name: 'crit',
+    description: [
+        'Critical Hits command. Gives the name, description, effect, and glory effect for the crit that gets randomly selected.'
+    ],
+    usage: [
+        'crit'
+    ],
+    execute(){
+        const critRollOne = dice(6);
+        const critRollTwo = dice(6);
+        const critRollString = critRollOne.toString()+critRollTwo.toString();
+        const critIndex = critArray['matrix'][critRollOne][critRollTwo-1];
+    
+        critOutput = [
+            'Critical Hit ('+critRollString+'): ',
+            '[**'+critArray['values'][critIndex]['name']+'**]',
+            '*'+  critArray['values'][critIndex]['description']+'*',
+            '[**Effect**]: '+critArray['values'][critIndex]['effect'],
+            '[**Glory**]: '+critArray['values'][critIndex]['glory']
+        ];
+        return critOutput.join('\r');
+    },
+};

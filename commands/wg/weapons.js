@@ -1,4 +1,4 @@
-const common = require('./../common.js');
+const {badCall} = require('./../../common.js');
 
 const utils = {
   getSearchTerm: (keyword) => {
@@ -49,20 +49,6 @@ const utils = {
     ]
 
     return output;
-  }
-}
-
-const weapons = function(context) {
-  try {
-    // By name
-    if (context in dict) {
-      return utils.print([dict[context]]);
-    }
-    // By keyword
-    return utils.searchByKeyword(context);
-  } catch (e) {
-    console.log(e)
-    return common.badCall('weapons')
   }
 }
 
@@ -1384,7 +1370,24 @@ const dict = {
 }
 
 module.exports = {
-  dict,
-  utils,
-  weapons,
+  name: 'weapons',
+  description: [
+    'A function to look up information for a weapon.',
+  ],
+  usage: [
+    'weapon {weapon name}',
+  ],
+  execute(context, prefix){
+    try {
+      // By name
+      if (context in dict) {
+        return utils.print([dict[context]]);
+      }
+      // By keyword
+      return utils.searchByKeyword(context);
+    } catch (e) {
+      console.log(e)
+      return badCall(prefix)
+    }
+  },
 };

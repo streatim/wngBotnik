@@ -1,4 +1,4 @@
-const common = require('./../common.js');
+const {dice, badCall} = require('./../../common.js');
 
 const objectivesArray = {
         'sororitas':[
@@ -99,16 +99,27 @@ const objectivesArray = {
         ]		
     }
 
-const objective = function objective(context) {    
-    const objectiveContext = context.trim();
-    if(objectiveContext in objectivesArray){
-        const objectiveDice = common.dice(6);
-        const objectiveOutput = [
-            objectiveContext.charAt(0).toUpperCase()+objectiveContext.slice(1)+' Objective ('+objectiveDice+')',
-            '*'+objectivesArray[objectiveContext][objectiveDice-1]+'*'
-        ]
-        return objectiveOutput.join('\r');
-    } else {return(common.badCall('objective'));}
-}
-
-module.exports = objective;
+module.exports = {
+    name: 'objective',
+    description: [
+        'Provide an objective for the indicated faction/sub-faction. The list of faction keywords to use are:',
+        'sororitas     telepathica',
+        'mechanicus    militarum', 
+        'inquisition   rogue',
+        'scum          astartes',
+        'aeldari       orks', 
+        'chaos',
+    ],
+    usage: 'objective {faction keyword}',
+    execute(context, prefix){
+        const objectiveContext = context.trim();
+        if(objectiveContext in objectivesArray){
+            const objectiveDice = dice(6);
+            const objectiveOutput = [
+                objectiveContext.charAt(0).toUpperCase()+objectiveContext.slice(1)+' Objective ('+objectiveDice+')',
+                '*'+objectivesArray[objectiveContext][objectiveDice-1]+'*'
+            ]
+            return objectiveOutput.join('\r');
+        } else {return(badCall(prefix));}
+    },
+};

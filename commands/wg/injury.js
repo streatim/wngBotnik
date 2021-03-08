@@ -1,5 +1,5 @@
 //This absolutely needs to be debugged and fixed. Maybe split the Array? Traumatic and Regular injuries work slightly different.
-const common = require('./../common.js');
+const {dice} = require('./../../common.js');
 
 const injuryArray = {
     'traumatic': {
@@ -36,22 +36,31 @@ const injuryArray = {
     }
 }
 
-
-
-const injury = function injury(context) {
-    const injuryContext = context.trim();
-    const injuryRoll = common.dice(6);
-    const side = (common.dice(6)%2==0) ? 'left' : 'right'; 
-    const injuryType = (injuryContext === 'traumatic') ? 'traumatic' : 'regular';
-    const injuryIndex = injuryArray[injuryType]['matrix'][injuryRoll-1];
-    const injuryDesc = injuryArray[injuryType]['values'][injuryIndex]['effect'];
-    const injuryEffect = (injuryContext === 'traumatic') ? '[**Effect**] '+injuryDesc.replace('SIDE', side) : '[**Escalation**] '+injuryDesc;
-
-    const output = [
-        injuryType.toUpperCase()+' INJURY ('+injuryRoll+')',
-        '[**Result:**] '+injuryArray[injuryType]['values'][injuryIndex]['injury'],
-        injuryEffect
-    ]    
-    return output.join('\r');
-}
-module.exports = injury;
+module.exports = {
+    name: 'injury',
+    description: [
+        'Random Memorable Injury Generator. Gives the injury and escalation of a memorable injury from the table on page 194.', 		
+        'If you would like to generate a traumatic injury (from page 195), add "traumatic" to the end of the command.',
+    ],
+    usage: [
+        'injury (Gives an injury and escalation for regular injuries)',
+        'injury traumatic (Gives a traumatic injury)',
+    ],
+    debug: true,
+    execute(context) {
+        const injuryContext = context.trim();
+        const injuryRoll = dice(6);
+        const side = (dice(6)%2==0) ? 'left' : 'right'; 
+        const injuryType = (injuryContext === 'traumatic') ? 'traumatic' : 'regular';
+        const injuryIndex = injuryArray[injuryType]['matrix'][injuryRoll-1];
+        const injuryDesc = injuryArray[injuryType]['values'][injuryIndex]['effect'];
+        const injuryEffect = (injuryContext === 'traumatic') ? '[**Effect**] '+injuryDesc.replace('SIDE', side) : '[**Escalation**] '+injuryDesc;
+    
+        const output = [
+            injuryType.toUpperCase()+' INJURY ('+injuryRoll+')',
+            '[**Result:**] '+injuryArray[injuryType]['values'][injuryIndex]['injury'],
+            injuryEffect
+        ]    
+        return output.join('\r');
+    },
+};
