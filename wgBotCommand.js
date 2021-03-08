@@ -33,8 +33,9 @@ bot.on('message', msg=> {
 		if(!bot.commands.has(msgCommand)){
 			return;
 		} else {
+			const command = bot.commands.get(msgCommand);
 			try {
-				msg.reply(' ('+msg.content+') \r'+bot.commands.get(msgCommand).execute(msgContext, msg));
+				msg.reply(' ('+msg.content+') \r'+command.execute(msgContext, msg));
 			} catch (error) {
 				console.error(error);
 				msg.reply('There was an error trying to execute that command!');

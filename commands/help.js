@@ -2,9 +2,9 @@ module.exports = {
     name: 'wghelp',
     description: 'List all of the Wraith and Glory commands, or get info about a specific command',
     //The below execute is going to need to be rewritten to work with this bot.
-    execute(context, msg){
+    execute(context, message){
         const data = [];
-        const {commands} = msg.bot;
+        const {commands} = message.client;
 
         if(!context.length) {
             data.push('Here\'s a list of all the Wraith and Glory commands:');
