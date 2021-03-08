@@ -2,15 +2,15 @@ module.exports = {
     name: 'wghelp',
     description: 'List all of the Wraith and Glory commands, or get info about a specific command',
     //The below execute is going to need to be rewritten to work with this bot.
-    execute(message, args){
+    execute(context, msg){
         const data = [];
-        const {commands} = message.client;
+        const {commands} = msg.bot;
 
-        if(!args.length) {
+        if(!context.length) {
             data.push('Here\'s a list of all the Wraith and Glory commands:');
             data.push(commands.map(command => command.name).join('\r'));
             data.push(`\nYou can use !wghelp [command name]\` to get info on a specific command!`);     
-                     
+            /*     
             return message.author.send(data, { split: true })
                 .then(() => {
                     if (message.channel.type === 'dm') return;
@@ -19,13 +19,14 @@ module.exports = {
                 .catch(error => {
                     console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
                     message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
-                });       
+                });   
+            */    
         } else {
             const name = args[0].toLowerCase();
             const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
             
             if (!command) {
-                return message.reply('that\'s not a valid command!');
+                return 'That\'s not a valid command!';
             }
             
             data.push(`**Name:** ${command.name}`);
@@ -39,7 +40,7 @@ module.exports = {
             if(command.usage){
                 data.push(`**Example Syntax:**\r ${command.usage.join('\r')}`);
             }
-            message.channel.send(data, { split: true });           
+            return data.join('\r');          
         }
     },
 }
