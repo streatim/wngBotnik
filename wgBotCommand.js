@@ -12,7 +12,7 @@ console.log('New log Test');
 bot.commands = new Discord.Collection();
 const commandFolders = fs.readdirSync('./commands');
 for (const folder of commandFolders) {
-	if(prefixes.find(p => p==folder)){
+	if(prefixes.find(p => p==folder)||['universal', 'multi'].includes(folder)){
 		const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
 		for (const file of commandFiles){
 			const command = require(`./commands/${folder}/${file}`);
@@ -21,7 +21,7 @@ for (const folder of commandFolders) {
 				//Now to assign prefixes. 
 				//${folder} is the determiner and, potentially, the other prefix. If something is in the wg folder, it is automatically affixed with the !wg prefix. If something is in the universal folder, it is affixed with all prefixes. If something is in a multi folder, check command.prefix for a list of prefixes it applies to.
 				if(folder === 'universal'){
-					command.prefix = prefixes.map(prefix=>prefix);
+					command.prefix = prefixes;
 				} else if(folder !== 'multi'){
 					command.prefix = [folder];
 				}
