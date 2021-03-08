@@ -8,28 +8,6 @@ const types = {
   WRATH: 'wrath',
 }
 
-const roll = function(context) {
-  try {
-    const requestType = utils.identify(context.trim());
-
-    switch (requestType) {
-      case types.EXTRA_DAMAGE:
-        return utils.extraDamage(context);
-      case types.D3:
-        return utils.d3();
-      case types.D6:
-        return utils.d6();
-      case types.D66:
-        return utils.d66();
-      default:
-        return utils.rollWrath(context);
-    }
-  } catch (e) {
-    console.log(e)
-    return common.badCall('roll')
-  }
-}
-
 const utils = {
   d3() {
     return ': Roll [d3]`: You rolled a (**' + common.dice(3) + '**)!';  
@@ -144,4 +122,35 @@ const utils = {
   }
 }
 
-module.exports = roll;
+module.exports = {
+  name: 'wgroll',
+  description: 'Wraith and Glory rolling Function. Can roll skills, extra damage, d3, d6, and d66.',
+  usage: [
+    '!wgroll 5 (Roll 4 regular dice, 1 wrath die. Equivalent to !roll 5w1)',
+    '!wgroll 5w2 (Roll 3 regular dice, 2 wrath dice).',
+    '!wgroll 3ed (Roll 3 Extra Die) (Could include brutal (!roll 3ed brutal) to recalculate percentages).',
+    '!wgroll d6 (Roll 1 d6 and returns the basic result)',
+    '!wgroll d66 (Roll 2d6 and returns the basic results)',
+  ],
+  execute(context){
+    try {
+      const requestType = utils.identify(context.trim());
+  
+      switch (requestType) {
+        case types.EXTRA_DAMAGE:
+          return utils.extraDamage(context);
+        case types.D3:
+          return utils.d3();
+        case types.D6:
+          return utils.d6();
+        case types.D66:
+          return utils.d66();
+        default:
+          return utils.rollWrath(context);
+      }
+    } catch (e) {
+      console.log(e)
+      return common.badCall('roll')
+    }
+  },
+}

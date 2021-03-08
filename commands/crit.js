@@ -84,20 +84,23 @@ const critArray = {
     }
 };    
 
-const crit = function crit(){  
-    const critRollOne = common.dice(6);
-    const critRollTwo = common.dice(6);
-    const critRollString = critRollOne.toString()+critRollTwo.toString();
-    const critIndex = critArray['matrix'][critRollOne][critRollTwo-1];
-
-    critOutput = [
-        'Critical Hit ('+critRollString+'): ',
-        '[**'+critArray['values'][critIndex]['name']+'**]',
-        '*'+  critArray['values'][critIndex]['description']+'*',
-        '[**Effect**]: '+critArray['values'][critIndex]['effect'],
-        '[**Glory**]: '+critArray['values'][critIndex]['glory']
-    ];
-    return critOutput.join('\r');
-}
-
-module.exports = crit;
+module.exports = {
+    name: 'wgcrit',
+    description: 'Critical Hits command. Gives the name, description, effect, and glory effect for the crit that gets randomly selected.',
+    usage: '!wgcrit',
+    execute(){
+        const critRollOne = common.dice(6);
+        const critRollTwo = common.dice(6);
+        const critRollString = critRollOne.toString()+critRollTwo.toString();
+        const critIndex = critArray['matrix'][critRollOne][critRollTwo-1];
+    
+        critOutput = [
+            'Critical Hit ('+critRollString+'): ',
+            '[**'+critArray['values'][critIndex]['name']+'**]',
+            '*'+  critArray['values'][critIndex]['description']+'*',
+            '[**Effect**]: '+critArray['values'][critIndex]['effect'],
+            '[**Glory**]: '+critArray['values'][critIndex]['glory']
+        ];
+        return critOutput.join('\r');
+    },
+};

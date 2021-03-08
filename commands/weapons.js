@@ -52,20 +52,6 @@ const utils = {
   }
 }
 
-const weapons = function(context) {
-  try {
-    // By name
-    if (context in dict) {
-      return utils.print([dict[context]]);
-    }
-    // By keyword
-    return utils.searchByKeyword(context);
-  } catch (e) {
-    console.log(e)
-    return common.badCall('weapons')
-  }
-}
-
 // Weapons dictionary
 const dict = {
   'knife': {
@@ -1384,7 +1370,24 @@ const dict = {
 }
 
 module.exports = {
-  dict,
-  utils,
-  weapons,
+  name: 'wgweapons',
+  description: 'A function to look up information for a weapon.',
+  usage: [
+    '!wgweapon {weapon name}',
+    '!wgweapon knife',
+    '!wgweapon astartes combat knife'
+  ],
+  execute(context){
+    try {
+      // By name
+      if (context in dict) {
+        return utils.print([dict[context]]);
+      }
+      // By keyword
+      return utils.searchByKeyword(context);
+    } catch (e) {
+      console.log(e)
+      return common.badCall('weapons')
+    }
+  },
 };

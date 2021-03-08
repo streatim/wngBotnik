@@ -77,22 +77,28 @@ const perilArray = {
     }
 }
 
-const perils = function perils(context) {
-    const perilsDice = parseInt(context);
-    const perilAdd = (isNaN(perilsDice)) ? 0 : perilsDice-1;
-    const perilRollOne = common.dice(6);
-    const perilRollTwo = common.dice(6);
-    //Tim note: Take a look at this math - is there a better way to do this if the matrix just operates on a standard d66 matrix?
-    const perilOneIndex = ((perilRollOne+perilAdd) > 10) ? 10 : perilRollOne+perilAdd;
-    const perilIndex = perilArray['matrix'][perilOneIndex][perilRollTwo-1];
-    const peril = perilArray['values'][perilIndex];
-    
-    perilsOutput = [
-        'Perils of the Warp ('+perilRollOne.toString()+perilRollTwo.toString()+'+'+(perilAdd*10)+')',
-        '[**'+peril['name']+'**]',
-        '*'+peril['desc']+'*'
-    ]
-    return perilsOutput.join('\r');
-}
-
-module.exports = perils;
+module.exports = {
+    name: 'wgperils',
+    description: 'Perils of the Warp command. - !perils {# of Peril Dice}',
+    usage: [
+        '!wgperils == !wgperils 1 == !wgroll d66.',
+        '!wgperils 3 == !rolld66+20, where the 20 comes from the 2 (3-1) additional perils.'
+    ],
+    execute(context){
+        const perilsDice = parseInt(context);
+        const perilAdd = (isNaN(perilsDice)) ? 0 : perilsDice-1;
+        const perilRollOne = common.dice(6);
+        const perilRollTwo = common.dice(6);
+        //Tim note: Take a look at this math - is there a better way to do this if the matrix just operates on a standard d66 matrix?
+        const perilOneIndex = ((perilRollOne+perilAdd) > 10) ? 10 : perilRollOne+perilAdd;
+        const perilIndex = perilArray['matrix'][perilOneIndex][perilRollTwo-1];
+        const peril = perilArray['values'][perilIndex];
+        
+        perilsOutput = [
+            'Perils of the Warp ('+perilRollOne.toString()+perilRollTwo.toString()+'+'+(perilAdd*10)+')',
+            '[**'+peril['name']+'**]',
+            '*'+peril['desc']+'*'
+        ]
+        return perilsOutput.join('\r');
+    }, 
+};

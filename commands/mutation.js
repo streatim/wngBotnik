@@ -96,28 +96,34 @@ const mutationArray = {
     }
 }
 
-const mutation = function mutation(context) {
-    const mutations = parseInt(context); //The number of previous mutations a character had. Each add +10 (essentially +1 to rollOne).
-    const mutationAdd = (isNaN(mutations)) ? 0 : mutations;
-    severity = common.dice(3);
-    //Start rolling on the tables. If rollOne+mutationAdd is >6 and severity is <3, increase the table severity and reroll.
-    do{
-        reroll=false;
-        mutationRollOne = common.dice(6); 
-        mutationCheck = mutationRollOne+mutationAdd;			
-        if(mutationCheck>=6&&severity<3){severity++;reroll=true;}
-    }while(reroll==true);
-    if(mutationCheck>6){mutationCheck=6;}
-    //We can now roll the second d6. It wasn't necessary for the previous loop, so rather than rerolling it we saved it for when we were on the right table/rollOne combo.
-    const mutationRollTwo = common.dice(6);
-    const mutationIndex = mutationArray['matrix'][severity][mutationCheck][mutationRollTwo-1];
-    const mutationOutput = [
-        '[**'+mutationArray['matrix'][severity]['type']+' Mutation**] ('+mutationCheck.toString()+mutationRollTwo.toString()+')',
-        mutationArray['values'][mutationIndex]['name'],
-        '*See page '+mutationArray['values'][mutationIndex]['page']+' in the rulebook.*'
-    ]
-    
-    return mutationOutput.join('\r');
-}
-
-module.exports = mutation;
+module.exports = {
+    name: 'wgmutation',
+    description: 'Provide a random mutation using the mutation tables. If you have previous mutations, add them to the end of the command.',
+    usage: [
+        '!wgmutation (equivalent of !mutation 0, or rolling on the mutation tables without an existing mutation)',
+        '!wgmutation 3 (rolling on the mutation with 3 existing mutations, so +30 (10*3) will be added to your d66 roll.)',
+    ],
+    execute(context){
+        const mutations = parseInt(context); //The number of previous mutations a character had. Each add +10 (essentially +1 to rollOne).
+        const mutationAdd = (isNaN(mutations)) ? 0 : mutations;
+        severity = common.dice(3);
+        //Start rolling on the tables. If rollOne+mutationAdd is >6 and severity is <3, increase the table severity and reroll.
+        do{
+            reroll=false;
+            mutationRollOne = common.dice(6); 
+            mutationCheck = mutationRollOne+mutationAdd;			
+            if(mutationCheck>=6&&severity<3){severity++;reroll=true;}
+        }while(reroll==true);
+        if(mutationCheck>6){mutationCheck=6;}
+        //We can now roll the second d6. It wasn't necessary for the previous loop, so rather than rerolling it we saved it for when we were on the right table/rollOne combo.
+        const mutationRollTwo = common.dice(6);
+        const mutationIndex = mutationArray['matrix'][severity][mutationCheck][mutationRollTwo-1];
+        const mutationOutput = [
+            '[**'+mutationArray['matrix'][severity]['type']+' Mutation**] ('+mutationCheck.toString()+mutationRollTwo.toString()+')',
+            mutationArray['values'][mutationIndex]['name'],
+            '*See page '+mutationArray['values'][mutationIndex]['page']+' in the rulebook.*'
+        ]
+        
+        return mutationOutput.join('\r');
+    },
+};

@@ -117,16 +117,18 @@ const trinketArray = [
     ]	
 ]; 
 
-
-const trinket = function trinket() { 
-    const chart = common.dice(3);
-    const trinketRollOne = common.dice(6);
-    const trinketRollTwo = common.dice(6);
-    output = [
-        'Trinket (Chart '+chart+': Roll'+trinketRollOne.toString()+trinketRollTwo.toString()+')',
-        '*'+trinketArray[chart-1][trinketRollOne-1][trinketRollTwo-1]+'*'
-    ]
-    return output.join('\r');
-}
-
-module.exports = trinket;
+module.exports = {
+    name: 'wgtrinket',
+    description: 'Random Trinket Generator. Gives the description of a trinket from one of three trinket tables.',    
+    usage: '!wgtrinket',
+    execute(){
+        const chart = common.dice(3);
+        const trinketRollOne = common.dice(6);
+        const trinketRollTwo = common.dice(6);
+        output = [
+            'Trinket (Chart '+chart+': Roll'+trinketRollOne.toString()+trinketRollTwo.toString()+')',
+            '*'+trinketArray[chart-1][trinketRollOne-1][trinketRollTwo-1]+'*'
+        ]
+        return output.join('\r');
+    }
+};
