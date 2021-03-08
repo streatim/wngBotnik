@@ -12,15 +12,29 @@ module.exports = {
     execute(context, prefix, message){
         const data = [];
         const {commands} = message.client;
+        //Find the largest string in all the commands, then add 5. This will set the gap length between columns.
+        let max = 0;
+        Array.from(commands.keys()).map(v => max = Math.max(max, v.length));
+        max += 5;
         const revisedPrefix = prefix.replace(superPrefix, '');
         //Remove the ! from the prefix.
 
-
         if(!context.length) {
+            //Only include commands that use this prefix.
             const prefixedCommands = Array.from(commands.keys()).filter(cmd => cmd.includes(prefix));
             data.push('Here\'s a list of all commands:');
-            data.push(prefixedCommands.join('\r'));
-            data.push(`\nYou can use `+prefix+`help {command name} to get info on a specific command!`);       
+            data.push('```');
+            const whiteSpace = ' ';
+            let cmdOutput = '';
+            for(i=0;i<prefixedCommands.length;i++){
+                cmdOutput += prefixedCommands[i];
+                if(i%2 !== 0){cmdOutput += '\r';}else{
+                    cmdOutput+=whiteSpace.repeat(max-prefixedCommands[i].length);
+                }
+            }
+            console.log(cmdOutput);
+            data.push(cmdOutput);
+            data.push(`\`\`\`You can use `+prefix+`help {command name} to get info on a specific command!`);       
         } else {
             const name = context.trim();
             const searchName = superPrefix+name;
