@@ -26,7 +26,7 @@ module.exports = {
             const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
             
             if (!command) {
-                return 'That\'s not a valid command!';
+                return `${name} is not a valid command!`;
             }
             
             data.push(`**Name:** ${command.name}`);
@@ -39,8 +39,8 @@ module.exports = {
             }
             if(command.usage){
                 data.push(`**Example Syntax:**\r ${command.usage.join('\r')}`);
-            }
-            return data.join('\r');          
+            }       
         }
+        return data.join('\r');   
     },
 }
