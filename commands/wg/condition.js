@@ -1,4 +1,4 @@
-const common = require('./../common.js');
+const common = require('./../../common.js');
 
 //Build an array of conditions.
 const conditionArray = {
@@ -19,7 +19,7 @@ const conditionArray = {
 };
 
 module.exports = {
-    name: 'wgcondition',
+    name: 'condition',
     description: [
         'Provides more information about the condition called on by the syntax.',
         'List of conditions:',
@@ -31,7 +31,12 @@ module.exports = {
         'restrained    staggered', 
         'terror        vulnerable'
     ],
-    usage: '!wgcondition {condition}',
+    usage: [
+        'condition {condition}'
+    ],
+    prefix: [
+        '!wg',
+    ],
     execute(context){
         const conditionType = context.trim();
         

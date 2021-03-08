@@ -1,4 +1,4 @@
-const common = require('./../common.js');
+const common = require('./../../common.js');
 
 //Build an array of critical hit results. Also include a matrix to identify the crit index with a d66 roll.
 const critArray = {
@@ -85,9 +85,16 @@ const critArray = {
 };    
 
 module.exports = {
-    name: 'wgcrit',
-    description: 'Critical Hits command. Gives the name, description, effect, and glory effect for the crit that gets randomly selected.',
-    usage: '!wgcrit',
+    name: 'crit',
+    description: [
+        'Critical Hits command. Gives the name, description, effect, and glory effect for the crit that gets randomly selected.'
+    ],
+    usage: [
+        'crit'
+    ],
+    prefix: [
+        '!wg',
+    ],
     execute(){
         const critRollOne = common.dice(6);
         const critRollTwo = common.dice(6);

@@ -1,4 +1,4 @@
-const common = require('./../common.js');
+const common = require('./../../common.js');
 
 const utils = {
   getSearchTerm: (keyword) => {
@@ -1370,13 +1370,16 @@ const dict = {
 }
 
 module.exports = {
-  name: 'wgweapons',
-  description: 'A function to look up information for a weapon.',
-  usage: [
-    '!wgweapon {weapon name}',
-    '!wgweapon knife',
-    '!wgweapon astartes combat knife'
+  name: 'weapons',
+  description: [
+    'A function to look up information for a weapon.',
   ],
+  usage: [
+    'weapon {weapon name}',
+  ],
+  prefix: [
+    '!wg',
+],
   execute(context){
     try {
       // By name

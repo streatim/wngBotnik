@@ -1,4 +1,4 @@
-const common = require('./../common.js');
+const common = require('./../../common.js');
 
 const types = {
   EXTRA_DAMAGE: 'ed',
@@ -123,14 +123,19 @@ const utils = {
 }
 
 module.exports = {
-  name: 'wgroll',
-  description: 'Wraith and Glory rolling Function. Can roll skills, extra damage, d3, d6, and d66.',
+  name: 'roll',
+  description: [
+    'Wraith and Glory rolling Function. Can roll skills, extra damage, d3, d6, and d66.'
+  ],
   usage: [
-    '!wgroll 5 (Roll 4 regular dice, 1 wrath die. Equivalent to !roll 5w1)',
-    '!wgroll 5w2 (Roll 3 regular dice, 2 wrath dice).',
-    '!wgroll 3ed (Roll 3 Extra Die) (Could include brutal (!roll 3ed brutal) to recalculate percentages).',
-    '!wgroll d6 (Roll 1 d6 and returns the basic result)',
-    '!wgroll d66 (Roll 2d6 and returns the basic results)',
+    'roll 5 (Roll 4 regular dice, 1 wrath die. Equivalent to !roll 5w1)',
+    'roll 5w2 (Roll 3 regular dice, 2 wrath dice).',
+    'roll 3ed (Roll 3 Extra Die) (Could include brutal (!roll 3ed brutal) to recalculate percentages).',
+    'roll d6 (Roll 1 d6 and returns the basic result)',
+    'roll d66 (Roll 2d6 and returns the basic results)',
+  ],
+  prefix: [
+    '!wg',
   ],
   execute(context){
     try {

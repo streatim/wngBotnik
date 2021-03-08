@@ -1,4 +1,4 @@
-const common = require('./../common.js');
+const common = require('./../../common.js');
 
 const trinketArray = [
     [
@@ -118,9 +118,16 @@ const trinketArray = [
 ]; 
 
 module.exports = {
-    name: 'wgtrinket',
-    description: 'Random Trinket Generator. Gives the description of a trinket from one of three trinket tables.',    
-    usage: '!wgtrinket',
+    name: 'trinket',
+    description: [
+        'Random Trinket Generator. Gives the description of a trinket from one of three trinket tables.',
+    ],    
+    usage: [
+        'trinket',
+    ],
+    prefix: [
+        '!wg',
+    ],
     execute(){
         const chart = common.dice(3);
         const trinketRollOne = common.dice(6);

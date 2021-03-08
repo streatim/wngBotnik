@@ -1,4 +1,4 @@
-const common = require('./../common.js');
+const common = require('./../../common.js');
 
 const objectivesArray = {
         'sororitas':[
@@ -100,7 +100,7 @@ const objectivesArray = {
     }
 
 module.exports = {
-    name: 'wgobjective',
+    name: 'objective',
     description: [
         'Provide an objective for the indicated faction/sub-faction. The list of faction keywords to use are:',
         'sororitas     telepathica',
@@ -110,7 +110,10 @@ module.exports = {
         'aeldari       orks', 
         'chaos',
     ],
-    usage: '!wgobjective sororitas',
+    usage: 'objective {faction keyword}',
+    prefix: [
+        '!wg',
+    ],
     execute(context){
         const objectiveContext = context.trim();
         if(objectiveContext in objectivesArray){

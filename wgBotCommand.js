@@ -1,70 +1,52 @@
 //Set up required packages and files.
 const Discord = require('discord.js');
-const config = require('./auth.json');
+const {prefixes, token} = require('./auth.json');
 const fs = require('fs');
+const defResponse = require('./defResponse.js');
 
 //Authenticate into the Discord Client.
 const bot = new Discord.Client();
+bot.login(token);
+
+//Dynamically require all command files.
 bot.commands = new Discord.Collection();
-bot.login(config.token);
-
-//Require all Wraith and Glory command files.
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-for (const file of commandFiles){
-	const command = require(`./commands/${file}`);
-
-	//Add the command to the command list.
-	bot.commands.set(command.name, command);
+const commandFolders = fs.readdirSync('./commands');
+	for (const folder of commandFolders) {
+	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles){
+		const command = require(`./commands/${folder}/${file}`);
+		for(const prefixes of command.prefix){
+			bot.commands.set(prefixes+command.name, command);
+		}
+	}
 }
 
-//Including Pathfinder Files.
-const pfroll = require('./pathfinder/commands/pfroll.js');
-const pfhelp = require('./pathfinder/commands/pfhelp.js');
-const pfff = require('./pathfinder/commands/pfinsult.js');
 
 //Listen to messages for potential commands.
-bot.on('message', msg=> {	
-	if(msg.content.startsWith('!wg')){	
-		//Gather everything after the ! but excluding any spaces. All commands can be expected to be !{command} {extra info for command}. Will sanitize the context in each function.
-		let msgCommand = msg.content.substring(1).split(' ')[0].toLowerCase();
-		let msgContext = msg.content.substring(msgCommand.length+4).toLowerCase();
-		
+bot.on('message', msg=> {
+	const prefix = prefixes.find(p => msg.content.startsWith(p));
+	if(prefix){
+		//An expected prefix has been found! Now to find a command.
+		let msgCommand = bot.commands.find(cmd => msg.content.startsWith(prefix+cmd.name));
+		if(!msgCommand){
+			return msg.channel.send(defResponse(msg.author.toString(), prefix));
+		}
+		let cmdLength = prefix.length+msgCommand.name.length;
+		let msgContext = msg.content.substring(cmdLength).toLowerCase().trim();
+		//Check to see if there was a space between msgCommand and msgContext (for Eric joke) <--Need to debug.
+		const ericAdd = (msg.content.indexOf(' ') === cmdLength && msg.content.indexOf(' ') !== -1 && msgContext.length!==0) ? 
+			'\r *This only works because **Eric** said it should*' : '';
+
 		//Check to see what the command was. If it's an existing command, run that command and report back the result. Otherwise, run a basic help command with no context.
-		if(!bot.commands.has(msgCommand)){
+		if(!bot.commands.has(prefix+msgCommand.name)){
 			return;
 		} else {
-			const command = bot.commands.get(msgCommand);
+			const command = bot.commands.get(prefix+msgCommand.name);
 			try {
-				msg.reply(' ('+msg.content+') \r'+command.execute(msgContext, msg));
+				msg.reply(' ('+msg.content+')'+ericAdd+'\r'+command.execute(msgContext, msg, prefix));
 			} catch (error) {
 				console.error(error);
-				msg.reply('There was an error trying to execute that command!');
-			}
-		}
-	}else{
-		if(msg.content.startsWith('!pf')){
-			//Deal with Eric's comment. :D
-			const pfCommands = ['roll', 'help', 'test'];
-			let msgCommand = '';
-			let msgContext = '';
-			let ericAdd = '';
-			let testmsg = msg.content.substring(3).split(' ')[0].toLowerCase();
-			if(pfCommands.indexOf(testmsg)!==-1){
-				msgCommand = msg.content.substring(3).split(' ')[0].toLowerCase();
-				msgContext = msg.content.substring(msgCommand.length+4).toLowerCase();				
-			}else{
-				msgCommand = msg.content.substring(3,7).toLowerCase();
-				msgContext = msg.content.substring(msgCommand.length+3).toLowerCase();
-				ericAdd = '\r *this only works because **Eric** said it should*';				
-			}
-		
-			switch (msgCommand){
-				case 'roll':
-					return msg.channel.send(msg.author.toString()+' ('+msg.content+') \r'+pfroll(msgContext)+ericAdd);
-				case 'help':
-					return msg.channel.send(msg.author.toString()+' ('+msg.content+') \r'+pfhelp(msgContext)+ericAdd);					
-				default:
-					return msg.channel.send(pfff(msg.author.toString()));
+				return msg.channel.send(defResponse(msg.author.toString(), prefix));
 			}
 		}
 	}	

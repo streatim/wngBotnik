@@ -1,5 +1,5 @@
 //This absolutely needs to be debugged and fixed. Maybe split the Array? Traumatic and Regular injuries work slightly different.
-const common = require('./../common.js');
+const common = require('./../../common.js');
 
 const injuryArray = {
     'traumatic': {
@@ -37,14 +37,17 @@ const injuryArray = {
 }
 
 module.exports = {
-    name: 'wginjury',
+    name: 'injury',
     description: [
         'Random Memorable Injury Generator. Gives the injury and escalation of a memorable injury from the table on page 194.', 		
         'If you would like to generate a traumatic injury (from page 195), add "traumatic" to the end of the command.',
     ],
     usage: [
-        '!wginjury (Gives an injury and escalation for regular injuries)',
-        '!wginjury traumatic (Gives a traumatic injury)',
+        'injury (Gives an injury and escalation for regular injuries)',
+        'injury traumatic (Gives a traumatic injury)',
+    ],
+    prefix: [
+        '!wg',
     ],
     execute(context) {
         const injuryContext = context.trim();

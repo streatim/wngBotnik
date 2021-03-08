@@ -1,4 +1,4 @@
-const common = require('./../common.js');
+const common = require('./../../common.js');
 
 const perilArray = {
     'values': [
@@ -78,11 +78,14 @@ const perilArray = {
 }
 
 module.exports = {
-    name: 'wgperils',
+    name: 'perils',
     description: 'Perils of the Warp command. - !perils {# of Peril Dice}',
     usage: [
-        '!wgperils == !wgperils 1 == !wgroll d66.',
-        '!wgperils 3 == !rolld66+20, where the 20 comes from the 2 (3-1) additional perils.'
+        'perils == !wgperils 1 == !wgroll d66.',
+        'perils 3 == !rolld66+20, where the 20 comes from the 2 (3-1) additional perils.'
+    ],
+    prefix: [
+        '!wg',
     ],
     execute(context){
         const perilsDice = parseInt(context);

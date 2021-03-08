@@ -1,4 +1,4 @@
-const common = require('./../common.js');
+const common = require('./../../common.js');
 //Array of Complications, split between "Combat" and "Other" (which were listed on two separate pages).
 //Each complication has a name and description (name/desc). There is also a matrix that provides the index
 //based off a d66 roll.
@@ -62,14 +62,17 @@ const complicationArray = {
 };
 
 module.exports = {
-	name: 'wgcomplication',
+	name: 'complication',
 	description: [
 		'Random Complication Generator. Gives the description of a complication from the rulebook.',
 		'If you would like to generate a combat complication (from page 191), add "combat" to the end of the command.',
 	],
 	usage: [
-		'!wgcomplication (Rolls off the general complication table)',
-		'!wgcomplication combat (Rolls off the combat complication table)',
+		'complication (Rolls off the general complication table)',
+		'complication combat (Rolls off the combat complication table)',
+	],
+	prefix: [
+		'!wg',
 	],
 	execute(context){
 		const complicationType = context.trim();		

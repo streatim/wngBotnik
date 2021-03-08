@@ -1,4 +1,4 @@
-const common = require('./../common.js');
+const common = require('./../../common.js');
 
 const mutationArray = {
     'values': [
@@ -97,11 +97,14 @@ const mutationArray = {
 }
 
 module.exports = {
-    name: 'wgmutation',
+    name: 'mutation',
     description: 'Provide a random mutation using the mutation tables. If you have previous mutations, add them to the end of the command.',
     usage: [
-        '!wgmutation (equivalent of !mutation 0, or rolling on the mutation tables without an existing mutation)',
-        '!wgmutation 3 (rolling on the mutation with 3 existing mutations, so +30 (10*3) will be added to your d66 roll.)',
+        'mutation (equivalent of !mutation 0, or rolling on the mutation tables without an existing mutation)',
+        'mutation 3 (rolling on the mutation with 3 existing mutations, so +30 (10*3) will be added to your d66 roll.)',
+    ],
+    prefix: [
+        '!wg',
     ],
     execute(context){
         const mutations = parseInt(context); //The number of previous mutations a character had. Each add +10 (essentially +1 to rollOne).
