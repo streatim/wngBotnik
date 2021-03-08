@@ -1,4 +1,4 @@
-const common = require('./../../common.js');
+const {dice, badCall} = require('./../../common.js');
 
 const types = {
   EXTRA_DAMAGE: 'ed',
@@ -10,15 +10,15 @@ const types = {
 
 const utils = {
   d3() {
-    return ': Roll [d3]`: You rolled a (**' + common.dice(3) + '**)!';  
+    return ': Roll [d3]`: You rolled a (**' + dice(3) + '**)!';  
   },
 
   d6() {
-    return ': Roll [d6]`: You rolled a (**' + common.dice(6) + '**)!';
+    return ': Roll [d6]`: You rolled a (**' + dice(6) + '**)!';
   },
 
   d66() {
-    return ': Roll [d66]`: You rolled a (**' + common.dice(6) + common.dice(6) + '**)!';    
+    return ': Roll [d66]`: You rolled a (**' + dice(6) + dice(6) + '**)!';    
   },
 
   extraDamage(context) {
@@ -32,7 +32,7 @@ const utils = {
     
     const rollList = new Array();
     for (let i = 0; i < rollDice; i++) {
-      const result = common.dice(6);
+      const result = dice(6);
       rollList.push(result);
       damage += pool[result - 1];
     }
@@ -62,11 +62,11 @@ const utils = {
     return [0, 0, 1, 1, 2, 2];
   },
 
-  rollWrath(context) {
+  rollWrath(context, prefix) {
     const diceString = context.split('w');
     const wrath = isNaN(parseInt(diceString[1])) ? 1 : parseInt(diceString[1]);
     const regular = parseInt(diceString[0]) - wrath;
-    if(regular<0){return common.badCall('roll');} //Return a bad call if more wrath die are called for than in the dice pool.
+    if(regular<0){return badCall(prefix);} //Return a bad call if more wrath die are called for than in the dice pool.
     const pool = utils.getPool();
 
     let iconCount = 0;
@@ -78,7 +78,7 @@ const utils = {
     const wrathList = [];
 
     for (let i = 0; i < regular; i++) {
-      let result = common.dice(6);
+      let result = dice(6);
       rollList.push(result);
       iconCount += pool[result - 1];
       
@@ -88,7 +88,7 @@ const utils = {
     }
 
     for (let i = 0; i < wrath; i++) {
-      result = common.dice(6);
+      result = dice(6);
       wrathList.push(result);
       iconCount += pool[result - 1];
 
@@ -134,10 +134,7 @@ module.exports = {
     'roll d6 (Roll 1 d6 and returns the basic result)',
     'roll d66 (Roll 2d6 and returns the basic results)',
   ],
-  prefix: [
-    '!wg',
-  ],
-  execute(context){
+  execute(context, prefix){
     try {
       const requestType = utils.identify(context.trim());
   
@@ -151,11 +148,11 @@ module.exports = {
         case types.D66:
           return utils.d66();
         default:
-          return utils.rollWrath(context);
+          return utils.rollWrath(context, prefix);
       }
     } catch (e) {
-      console.log(e)
-      return common.badCall('roll')
+      console.log(e);
+      return badCall(prefix);
     }
   },
 }

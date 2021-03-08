@@ -1,4 +1,4 @@
-const common = require('./../../common.js');
+const {intValCheck, dice} = require('./../../common.js');
 const operators = {
     '+': function(a, b) {return a + b },
     '-': function(a, b) {return a - b },
@@ -15,12 +15,12 @@ const indRoll = function indRoll(context){
     const rollList = [];
 
     let newContext = context.split('d');
-    x = common.intValCheck(newContext[0], x);
-    y = common.intValCheck(newContext[1], y);
+    x = intValCheck(newContext[0], x);
+    y = intValCheck(newContext[1], y);
     const plural = (x>1) ? 's':'';
 
     for(g=0;g<x;g++){
-        let result = common.dice(y);
+        let result = dice(y);
         rollList.push(result);
         indRollTotal += result;
     }
@@ -42,9 +42,6 @@ module.exports = {
     ],
     usage: [
         'roll',
-    ],
-    prefix: [
-        '!pf',
     ],
     execute(context){
         /*
@@ -109,7 +106,7 @@ module.exports = {
                     continue;
                 } else {
                     //At this point, this *should* be just a number to be added or subtracted from the values. If it isn't an integer, make it 0.
-                    totalAlter = common.intValCheck(rollCombos[j], 0);
+                    totalAlter = intValCheck(rollCombos[j], 0);
                     rollResultStrings.push(op+totalAlter)
                     //modifyString += op+totalAlter;
                 }      

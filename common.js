@@ -1,3 +1,4 @@
+const defResponse = require('./defResponse.js');
 const common = {
   dice(potential) {
     //Mimics a dice roll with a die the size of "potential."
@@ -10,9 +11,14 @@ const common = {
     return output;
   },
 
-  badCall(type) {
-    //Return a "bad call" message that lets the person know they used the command !wg(type) wrong.
-    return 'Please see !wghelp '+type+' for instructions on how to use the !wg'+type+' command.';
+  badCall(prefix) {
+    return {
+      files: [{
+        attachment: './img/magicWord.gif',
+        name: 'magicWord.gif'
+      }],
+      content: defResponse(prefix),
+    };
   }
 };
 

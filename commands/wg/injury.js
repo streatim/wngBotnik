@@ -1,5 +1,5 @@
 //This absolutely needs to be debugged and fixed. Maybe split the Array? Traumatic and Regular injuries work slightly different.
-const common = require('./../../common.js');
+const {dice} = require('./../../common.js');
 
 const injuryArray = {
     'traumatic': {
@@ -46,13 +46,11 @@ module.exports = {
         'injury (Gives an injury and escalation for regular injuries)',
         'injury traumatic (Gives a traumatic injury)',
     ],
-    prefix: [
-        '!wg',
-    ],
+    debug: true,
     execute(context) {
         const injuryContext = context.trim();
-        const injuryRoll = common.dice(6);
-        const side = (common.dice(6)%2==0) ? 'left' : 'right'; 
+        const injuryRoll = dice(6);
+        const side = (dice(6)%2==0) ? 'left' : 'right'; 
         const injuryType = (injuryContext === 'traumatic') ? 'traumatic' : 'regular';
         const injuryIndex = injuryArray[injuryType]['matrix'][injuryRoll-1];
         const injuryDesc = injuryArray[injuryType]['values'][injuryIndex]['effect'];

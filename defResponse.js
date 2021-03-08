@@ -1,4 +1,4 @@
-const defResponse = function defResponse(author, prefix){
+const defResponse = function defResponse(prefix){
     const insult = {
         adj1: [
             'saucy',
@@ -253,9 +253,9 @@ const defResponse = function defResponse(author, prefix){
     const noun = insult.noun[Math.floor(Math.random() * insult.noun.length)];
 
     output = [
-        'Sassy Ryan-Response says "Hey '+author+', did you screw up a command, you',
+        `Sassy Ryan-Response says "Did you screw up a **${prefix}** command, you`,
         adjective1, adjective2, noun+'?!"',
-        `\r Try using ${prefix}help`,
+        `\rWinners use **${prefix}help**`,
     ]
     return output.join(' ');
 }

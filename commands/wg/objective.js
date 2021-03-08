@@ -1,4 +1,4 @@
-const common = require('./../../common.js');
+const {dice, badCall} = require('./../../common.js');
 
 const objectivesArray = {
         'sororitas':[
@@ -111,18 +111,15 @@ module.exports = {
         'chaos',
     ],
     usage: 'objective {faction keyword}',
-    prefix: [
-        '!wg',
-    ],
-    execute(context){
+    execute(context, prefix){
         const objectiveContext = context.trim();
         if(objectiveContext in objectivesArray){
-            const objectiveDice = common.dice(6);
+            const objectiveDice = dice(6);
             const objectiveOutput = [
                 objectiveContext.charAt(0).toUpperCase()+objectiveContext.slice(1)+' Objective ('+objectiveDice+')',
                 '*'+objectivesArray[objectiveContext][objectiveDice-1]+'*'
             ]
             return objectiveOutput.join('\r');
-        } else {return(common.badCall('objective'));}
+        } else {return(badCall(prefix));}
     },
 };

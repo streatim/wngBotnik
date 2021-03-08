@@ -1,4 +1,4 @@
-const common = require('./../../common.js');
+const {dice} = require('./../../common.js');
 //Array of Complications, split between "Combat" and "Other" (which were listed on two separate pages).
 //Each complication has a name and description (name/desc). There is also a matrix that provides the index
 //based off a d66 roll.
@@ -71,14 +71,11 @@ module.exports = {
 		'complication (Rolls off the general complication table)',
 		'complication combat (Rolls off the combat complication table)',
 	],
-	prefix: [
-		'!wg',
-	],
 	execute(context){
 		const complicationType = context.trim();		
 		const compTable = (complicationType === 'combat') ? 'combat' : 'other';
-		const compRollOne = common.dice(6);
-		const compRollTwo = common.dice(6);
+		const compRollOne = dice(6);
+		const compRollTwo = dice(6);
 		const compIndex = complicationArray[compTable]['matrix'][compRollOne][compRollTwo-1];
 		const compOutput = [
 			'Complication ('+compRollOne.toString()+compRollTwo.toString()+') : ',

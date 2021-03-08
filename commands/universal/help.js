@@ -1,3 +1,5 @@
+const {superPrefix} = require('./../../auth.json');
+
 module.exports = {
     name: 'help',
     description: [
@@ -6,15 +8,11 @@ module.exports = {
     usage: [
         'help {command}'
     ],
-    prefix: [
-        '!wg',
-        '!pf',
-    ],
     //The below execute is going to need to be rewritten to work with this bot.
-    execute(context, message, prefix){
+    execute(context, prefix, message){
         const data = [];
         const {commands} = message.client;
-        const revisedPrefix = prefix.replace('!', '');
+        const revisedPrefix = prefix.replace(superPrefix, '');
         //Remove the ! from the prefix.
 
 
@@ -25,7 +23,7 @@ module.exports = {
             data.push(`\nYou can use `+prefix+`help {command name} to get info on a specific command!`);       
         } else {
             const name = context.trim();
-            const searchName = '!'+name;
+            const searchName = superPrefix+name;
             const command = commands.get(searchName) || commands.find(c => c.aliases && c.aliases.includes(searchName));
 
             if (!command) {

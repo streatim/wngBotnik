@@ -1,4 +1,4 @@
-const common = require('./../../common.js');
+const {dice} = require('./../../common.js');
 
 //Build an array of critical hit results. Also include a matrix to identify the crit index with a d66 roll.
 const critArray = {
@@ -92,12 +92,9 @@ module.exports = {
     usage: [
         'crit'
     ],
-    prefix: [
-        '!wg',
-    ],
     execute(){
-        const critRollOne = common.dice(6);
-        const critRollTwo = common.dice(6);
+        const critRollOne = dice(6);
+        const critRollTwo = dice(6);
         const critRollString = critRollOne.toString()+critRollTwo.toString();
         const critIndex = critArray['matrix'][critRollOne][critRollTwo-1];
     

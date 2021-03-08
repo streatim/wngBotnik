@@ -1,4 +1,4 @@
-const common = require('./../../common.js');
+const {badCall} = require('./../../common.js');
 
 //Build an array of conditions.
 const conditionArray = {
@@ -23,30 +23,31 @@ module.exports = {
     description: [
         'Provides more information about the condition called on by the syntax.',
         'List of conditions:',
+        '```',
         'bleeding      blinded',
         'exhausted     fear',
         'frenzied      hindered',
         'on fire       pinned',
         'poisoned      prone',
         'restrained    staggered', 
-        'terror        vulnerable'
+        'terror        vulnerable',
+        '```'
     ],
     usage: [
         'condition {condition}'
     ],
-    prefix: [
-        '!wg',
-    ],
-    execute(context){
+    execute(context, prefix){
         const conditionType = context.trim();
         
         //This function provides information about the conditions listed.
         if(conditionType in conditionArray){
             const condOutput = [
                 '[**'+conditionType.toUpperCase()+'**]',
-                conditionArray[conditionType]
+                '```'+conditionArray[conditionType]+'```'
             ];
             return condOutput.join('\r');
-        } else {return common.badCall('condition');}
+        } else {
+            return badCall(prefix);
+        }
     }, 
 };
