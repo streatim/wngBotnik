@@ -14,7 +14,7 @@ for (const file of commandFiles){
 	const command = require(`./commands/${file}`);
 
 	//Add the command to the command list.
-	client.commands.set(command.name, command);
+	bot.commands.set(command.name, command);
 }
 
 //Including Pathfinder Files.
@@ -34,7 +34,7 @@ bot.on('message', msg=> {
 			return;
 		} else {
 			try {
-				client.commands.get(command).execute(msgContext);
+				bot.commands.get(command).execute(msgContext);
 			} catch (error) {
 				console.error(error);
 				message.reply('there was an error trying to execute that command!');
