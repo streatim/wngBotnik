@@ -34,10 +34,10 @@ bot.on('message', msg=> {
 			return;
 		} else {
 			try {
-				bot.commands.get(command).execute(msgContext);
+				msg.reply(msg.author.toString()+' ('+msg.content+') \r'+bot.commands.get(command).execute(msgContext));
 			} catch (error) {
 				console.error(error);
-				message.reply('there was an error trying to execute that command!');
+				msg.reply('There was an error trying to execute that command!');
 			}
 		}
 	}else{
