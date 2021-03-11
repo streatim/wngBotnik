@@ -33,9 +33,8 @@ for (const folder of commandFolders) {
 	}
 }
 
-console.log(bot.commands);
 //Listen to messages for potential commands.
-bot.on('message', msg=> {
+bot.on('message', async msg=> {
 	const prefixCommand = prefixes.find(p => msg.content.startsWith(superPrefix+p));
 	if(prefixCommand){
 		const prefix = superPrefix+prefixCommand;
@@ -54,7 +53,7 @@ bot.on('message', msg=> {
 		} else {
 			const command = bot.commands.get(prefix+msgCommand.name);
 			try {
-				let response = command.execute(msgContext, prefix, msg);
+				let response = await command.execute(msgContext, prefix, msg);
 				//Sometimes, especially if the command is bad, it's returning with an object rather than a string. msg.reply works differently depending on what's what, so we just need to make sure it's a string rather than an object.
 				if(typeof response === 'string'){
 					msg.reply(' ('+msg.content+')'+ericAdd+'\r'+response);
