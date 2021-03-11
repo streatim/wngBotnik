@@ -98,7 +98,7 @@ const mutationArray = {
 
 module.exports = {
     name: 'mutation',
-    description: 'Provide a random mutation using the mutation tables. If you have previous mutations, add them to the end of the command.',
+    description: ['Provide a random mutation using the mutation tables. If you have previous mutations, add them to the end of the command.'],
     usage: [
         'mutation (equivalent of !mutation 0, or rolling on the mutation tables without an existing mutation)',
         'mutation 3 (rolling on the mutation with 3 existing mutations, so +30 (10*3) will be added to your d66 roll.)',

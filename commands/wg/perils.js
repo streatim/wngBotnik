@@ -79,7 +79,7 @@ const perilArray = {
 
 module.exports = {
     name: 'perils',
-    description: 'Perils of the Warp command. - !perils {# of Peril Dice}',
+    description: ['Perils of the Warp command. - !perils {# of Peril Dice}'],
     usage: [
         'perils == !wgperils 1 == !wgroll d66.',
         'perils 3 == !rolld66+20, where the 20 comes from the 2 (3-1) additional perils.'
