@@ -1,12 +1,13 @@
 {
-  "name": "wngbotnik",
+  "name": "wgbot",
   "version": "1.0.0",
-  "description": "Customized version of a WnG Bot for Dicerolling and such. Originally written by GeekzAnonymous as WnGDR.",
-  "main": "wgBotCommand.js",
+  "description": "A custombot for Team AcaGameia servers.. Originally drawn from a rewrite of a bot written by GeekzAnonymous as WnGDR.",
+  "main": "wgBot.js",
   "author": "Tim het Maus",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.5.1",
+    "mariadb": "^2.5.3",
     "sequelize": "^6.5.0",
     "sqlite3": "^5.0.2"
   },
