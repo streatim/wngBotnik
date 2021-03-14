@@ -133,6 +133,6 @@ module.exports = {
             'Trinket (Chart '+chart+': Roll'+trinketRollOne.toString()+trinketRollTwo.toString()+')',
             '*'+trinketArray[chart-1][trinketRollOne-1][trinketRollTwo-1]+'*'
         ]
-        return output.join('\r');
+        return output.join('\n');
     }
 };

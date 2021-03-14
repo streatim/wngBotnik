@@ -28,7 +28,7 @@ module.exports = {
             let cmdOutput = '';
             for(i=0;i<prefixedCommands.length;i++){
                 cmdOutput += prefixedCommands[i];
-                if(i%2 !== 0){cmdOutput += '\r';}else{
+                if(i%2 !== 0){cmdOutput += '\n';}else{
                     cmdOutput+=whiteSpace.repeat(max-prefixedCommands[i].length);
                 }
             }
@@ -50,13 +50,13 @@ module.exports = {
                 data.push(`**Aliases:** ${command.aliases.join(', ')}`);
             }
             if(command.description){
-                data.push(`**Description:**\r${command.description.join('\r')}`);
+                data.push(`**Description:**\n${command.description.join('\n')}`);
             }
             if(command.usage){
                 const newUsage = command.usage.map(use => prefix+use);
-                data.push(`**Example Syntax:**\r${newUsage.join('\r')}`);
+                data.push(`**Example Syntax:**\n${newUsage.join('\n')}`);
             }       
         }
-        return data.join('\r');   
+        return data.join('\n');   
     },
 }

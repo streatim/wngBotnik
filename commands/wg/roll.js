@@ -37,7 +37,7 @@ const utils = {
       damage += pool[result - 1];
     }
 
-    return output = ': You deal **' + damage + '** additional damage!\r[Extra Dice] *' + rollList + '*';
+    return output = ': You deal **' + damage + '** additional damage!\n[Extra Dice] *' + rollList + '*';
   },
 
   identify(context) {
@@ -118,7 +118,7 @@ const utils = {
     }
 
     // Join output with line breaks
-    return output.join('\r');
+    return output.join('\n');
   }
 }
 

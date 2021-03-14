@@ -84,6 +84,6 @@ module.exports = {
 		]; 
 		
 		//Join the output with line breaks.
-		return compOutput.join('\r');
+		return compOutput.join('\n');
 	},
 };

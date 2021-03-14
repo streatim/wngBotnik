@@ -105,6 +105,6 @@ module.exports = {
             '[**Effect**]: '+critArray['values'][critIndex]['effect'],
             '[**Glory**]: '+critArray['values'][critIndex]['glory']
         ];
-        return critOutput.join('\r');
+        return critOutput.join('\n');
     },
 };

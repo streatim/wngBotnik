@@ -99,6 +99,6 @@ module.exports = {
             '[**'+peril['name']+'**]',
             '*'+peril['desc']+'*'
         ]
-        return perilsOutput.join('\r');
+        return perilsOutput.join('\n');
     }, 
 };

@@ -29,7 +29,7 @@ const utils = {
       ]);
     });
 
-    return output.join('\r');
+    return output.join('\n');
   },
   searchByKeyword: (keyword) => {
     const results = []

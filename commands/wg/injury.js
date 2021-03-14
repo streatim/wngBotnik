@@ -61,6 +61,6 @@ module.exports = {
             '[**Result:**] '+injuryArray[injuryType]['values'][injuryIndex]['injury'],
             injuryEffect
         ]    
-        return output.join('\r');
+        return output.join('\n');
     },
 };
