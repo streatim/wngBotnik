@@ -255,7 +255,7 @@ const defResponse = function defResponse(prefix){
     output = [
         `Sassy Ryan-Response says "Did you screw up a **${prefix}** command, you`,
         adjective1, adjective2, noun+'?!"',
-        `\rWinners use **${prefix}help**`,
+        `\nWinners use **${prefix}help**`,
     ]
     return output.join(' ');
 }

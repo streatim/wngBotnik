@@ -72,7 +72,7 @@ module.exports = {
             //Check to see if the rollcommand is just +NUM or -NUM. This is because Joe was sad.
             if(rollCommands[i].match(/^[\+|-]\s*\d+$/)){
                 //This command is just +5 or +2 or something. In the old program this defaulted to 1d20+/-Y, and Joe really liked it. So we're putting it back in.
-                joeCallout = '*This only works because **Joe** made Tim sad*\r';
+                joeCallout = '*This only works because **Joe** made Tim sad*\n';
                 rollCommands[i] = '1d20'+rollCommands[i];
             }
     
@@ -113,7 +113,7 @@ module.exports = {
                 totalRoll = operators[op](totalRoll, totalAlter);
             }
             let diceString = (diceStrings.length>0) ? diceStrings.join(' and ')+'.' : 'no dice.';
-            rollResultString = rollResultStrings.join('\r');
+            rollResultString = rollResultStrings.join('\n');
     
             rollStrings.push(diceString);
             if(rollResultString !== ''){
@@ -122,12 +122,12 @@ module.exports = {
             if(modifyString !== ''){rollStrings.push(modifyString);}
             rollStrings.push('for a total of: **'+totalRoll+'**');
     
-            output.push(rollStrings.join('\r'));
+            output.push(rollStrings.join('\n'));
         }
         //Add "Rolling " to the start of the first result in output. If there's only a single result, that's fine!
         output[0] = 'Rolling '+output[0];
     
         //If there are more than one result in output, then add two line breaks and "Then you rolled "
-        return joeCallout+output.join('\r\rThen you rolled ');
+        return joeCallout+output.join('\n\nThen you rolled ');
     } 
 };

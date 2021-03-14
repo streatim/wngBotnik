@@ -119,7 +119,7 @@ module.exports = {
                 objectiveContext.charAt(0).toUpperCase()+objectiveContext.slice(1)+' Objective ('+objectiveDice+')',
                 '*'+objectivesArray[objectiveContext][objectiveDice-1]+'*'
             ]
-            return objectiveOutput.join('\r');
+            return objectiveOutput.join('\n');
         } else {return(badCall(prefix));}
     },
 };

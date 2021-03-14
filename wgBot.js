@@ -45,7 +45,7 @@ bot.on('message', async msg=> {
 		let msgContext = msg.content.substring(cmdLength).toLowerCase().trim();
 		//Check to see if there was a space between msgCommand and msgContext (for Eric joke)
 		const ericAdd = (msg.content.indexOf(' ') !== cmdLength && msgContext.length!==0) ? 
-			'\r *This only works because **Eric** said it should*' : '';
+			'\n*This only works because **Eric** said it should*' : '';
 
 		//Check to see what the command was. If it's an existing command, run that command and report back the result. Otherwise, insult them (and log it).
 		if(!bot.commands.has(prefix+msgCommand.name)){
@@ -56,7 +56,7 @@ bot.on('message', async msg=> {
 				let response = await command.execute(msgContext, prefix, msg);
 				//Sometimes, especially if the command is bad, it's returning with an object rather than a string. msg.reply works differently depending on what's what, so we just need to make sure it's a string rather than an object.
 				if(typeof response === 'string'){
-					msg.reply(' ('+msg.content+')'+ericAdd+'\r'+response);
+					msg.reply(' ('+msg.content+')'+ericAdd+'\n'+response);
 				} else {
 					msg.reply(response);
 				}
