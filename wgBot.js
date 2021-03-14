@@ -52,7 +52,6 @@ bot.on('message', async msg=> {
 				}
 			}
 		} else {cmdLength = prefix.length+msgCommand.name.length;}
-
 		let msgContext = msg.content.substring(cmdLength).toLowerCase().trim();
 		//Check to see if there was a space between msgCommand and msgContext (for Eric joke)
 		const ericAdd = (msg.content.indexOf(' ') !== cmdLength && msgContext.length!==0) ? 
