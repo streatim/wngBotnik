@@ -124,6 +124,6 @@ module.exports = {
             '*See page '+mutationArray['values'][mutationIndex]['page']+' in the rulebook.*'
         ]
         
-        return mutationOutput.join('\r');
+        return mutationOutput.join('\n');
     },
 };
