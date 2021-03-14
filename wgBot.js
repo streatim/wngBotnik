@@ -40,8 +40,19 @@ bot.on('message', async msg=> {
 		const prefix = superPrefix+prefixCommand;
 		//An expected prefix has been found! Now to find a command.
 		let msgCommand = bot.commands.find(cmd => msg.content.startsWith(prefix+cmd.name));
-		if(!msgCommand){return msg.reply(badCall(prefix));}
-		let cmdLength = prefix.length+msgCommand.name.length;
+		let cmdLength = 0;
+		if(!msgCommand){
+			//Check for aliases.
+			let prefixlessCmd = msg.content.replace(prefix, '');
+			msgCommand = bot.commands.find(cmd => cmd.aliases && prefixlessCmd.startsWith(cmd.aliases));
+			if(!msgCommand){return msg.reply(badCall(prefix));}
+			for(i=0;i<msgCommand.aliases.length;i++){
+				if(prefixlessCmd.startsWith(msgCommand.aliases[i])){
+					cmdLength = prefix.length+msgCommand.aliases[i].length;
+				}
+			}
+		} else {cmdLength = prefix.length+msgCommand.name.length;}
+
 		let msgContext = msg.content.substring(cmdLength).toLowerCase().trim();
 		//Check to see if there was a space between msgCommand and msgContext (for Eric joke)
 		const ericAdd = (msg.content.indexOf(' ') !== cmdLength && msgContext.length!==0) ? 

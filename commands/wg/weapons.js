@@ -1377,6 +1377,9 @@ module.exports = {
   usage: [
     'weapon {weapon name}',
   ],
+  aliases: [
+    'weapon',
+  ],
   execute(context, prefix){
     try {
       // By name
