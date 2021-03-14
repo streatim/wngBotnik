@@ -50,11 +50,11 @@ module.exports = {
                 data.push(`**Aliases:** ${command.aliases.join(', ')}`);
             }
             if(command.description){
-                data.push(`**Description:**\r ${command.description.join('\r')}`);
+                data.push(`**Description:**\r${command.description.join('\r')}`);
             }
             if(command.usage){
                 const newUsage = command.usage.map(use => prefix+use);
-                data.push(`**Example Syntax:**\r ${newUsage.join('\r')}`);
+                data.push(`**Example Syntax:**\r${newUsage.join('\r')}`);
             }       
         }
         return data.join('\r');   
