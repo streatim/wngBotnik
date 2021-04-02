@@ -10,7 +10,6 @@ const sql = {
             connectTimeout: 1000
         }
     }),
-
     async test (db) {
         try {
             await db.authenticate();

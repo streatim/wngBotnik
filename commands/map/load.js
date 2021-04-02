@@ -11,7 +11,11 @@ module.exports = {
         'load'
     ],
     async execute(msgContext, prefix, msg){
-        return await test(connection);
+        if(await test(connection)){
+            //We have a connection to the database.
+        } else {
+            return 'FALSE.';
+        }
         //return 'Test Complete';
         /*
         msg.channel.send({
