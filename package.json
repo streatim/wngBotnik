@@ -8,8 +8,8 @@
   "dependencies": {
     "discord.js": "^12.5.1",
     "mariadb": "^2.5.3",
-    "sequelize": "^6.5.0",
-    "sqlite3": "^5.1.4"
+    "sequelize": "^6.27.0",
+    "sqlite3": "^5.0.2"
   },
   "scripts": {
     "test": "jest"
